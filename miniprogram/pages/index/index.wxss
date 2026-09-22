@@ -264,7 +264,7 @@
 .img-map {
     display: flex;
     flex-direction: column;
-    gap: 12rpx;
+    gap: 40rpx;
 }
 
 .img-map-row {
