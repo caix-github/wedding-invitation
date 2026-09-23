@@ -1,3 +1,27 @@
+<!-- 主题容器 -->
+<view class="theme-wrap {{ currentTheme }}">
+
+<!-- 主题切换面板 -->
+<view class="theme-panel">
+    <view class="theme-toggle-btn" bindtap="toggleThemePanel">
+        <text class="theme-toggle-icon">🎨</text>
+    </view>
+    <view wx:if="{{ showThemePanel }}" class="theme-dropdown" catchtap="">
+        <view class="theme-dropdown-title">选择主题风格</view>
+        <view 
+            wx:for="{{ themeList }}" 
+            wx:key="key" 
+            class="theme-option {{ item.key === currentTheme ? 'active' : '' }}"
+            data-theme="{{ item.key }}"
+            bindtap="selectTheme"
+        >
+            <view class="theme-color-dot" style="background-color: {{ item.primary }};"></view>
+            <view class="theme-option-name">{{ item.name }}</view>
+            <view wx:if="{{ item.key === currentTheme }}" class="theme-check">✓</view>
+        </view>
+    </view>
+</view>
+
 <view class="title">
     <view>好久不见，婚礼见丨{{ couple[0].name }}&{{ couple[1].name }}</view>
     <view>我们结婚啦~</view>
@@ -269,3 +293,5 @@
 <view wx:if="{{ isManager }}" class="manager">
     <image bindtap="goInfo" src="../../images/icon/manager.png" mode="widthFix"/>
 </view>
+
+</view><!-- /theme-wrap -->

@@ -20,6 +20,13 @@ Page({
             greeting: ''
         },
         weddingTimeStr: [], // 格式化的婚礼日期列表
+        currentTheme: APP.globalData.currentTheme, // 当前主题
+        themeList: Object.entries(APP.globalData.themes).map(([key, value]) => ({
+            key,
+            name: value.name,
+            primary: value.primary
+        })), // 主题选项列表
+        showThemePanel: false, // 是否显示主题切换面板
 
         // 以上变量都不用动，以下变量是需要手动修改的
 
@@ -381,5 +388,51 @@ Page({
         wx.navigateTo({
             url: '../info/index'
         })
+    },
+
+    // 切换主题面板显示/隐藏
+    toggleThemePanel() {
+        this.setData({
+            showThemePanel: !this.data.showThemePanel
+        })
+    },
+
+    // 选择并应用主题
+    selectTheme(e) {
+        const themeKey = e.currentTarget.dataset.theme
+        if (themeKey === this.data.currentTheme) {
+            this.setData({ showThemePanel: false })
+            return
+        }
+        
+        // 调用全局方法切换主题
+        APP.setTheme(themeKey)
+        
+        this.setData({
+            currentTheme: themeKey,
+            showThemePanel: false
+        })
+        
+        // 更新导航栏颜色
+        const theme = APP.getCurrentTheme()
+        wx.setNavigationBarColor({
+            frontColor: '#ffffff',
+            backgroundColor: theme.primary,
+            animation: {
+                duration: 300,
+                timingFunc: 'easeInOut'
+            }
+        })
+        
+        wx.showToast({
+            title: `已切换为${theme.name}`,
+            icon: 'none',
+            duration: 1500
+        })
+    },
+
+    // 点击空白处关闭主题面板
+    closeThemePanel() {
+        this.setData({ showThemePanel: false })
     }
 })

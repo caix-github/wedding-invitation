@@ -1,18 +1,192 @@
+/* ===== 主题 CSS 变量 ===== */
+
+/* 默认变量（中国红） */
+.theme-wrap {
+    --theme-primary: #85160E;
+    --theme-primary-light: rgba(133, 22, 14, .9);
+    --theme-primary-dark: rgba(133, 22, 14, 1);
+    --theme-primary-fade: rgba(133, 22, 14, .5);
+    --theme-bg: #ffffff;
+    --theme-text: #222222;
+    --theme-text-light: rgb(91, 106, 145);
+    --theme-separator: rgb(178, 178, 178);
+    --theme-love: rgb(133, 22, 14);
+    --theme-shadow: rgba(153, 153, 153, .3);
+    --theme-btn-bg: rgba(133, 22, 14, .9);
+}
+
+/* 清新橙 */
+.theme-wrap.theme-orange {
+    --theme-primary: #FF7043;
+    --theme-primary-light: rgba(255, 112, 67, .9);
+    --theme-primary-dark: rgba(255, 112, 67, 1);
+    --theme-primary-fade: rgba(255, 112, 67, .5);
+    --theme-bg: #FFF8F0;
+    --theme-text: #333333;
+    --theme-text-light: #8B6914;
+    --theme-separator: #E0A87A;
+    --theme-love: #FF7043;
+    --theme-shadow: rgba(255, 112, 67, .25);
+    --theme-btn-bg: rgba(255, 112, 67, .9);
+}
+
+/* 文艺绿 */
+.theme-wrap.theme-green {
+    --theme-primary: #66BB6A;
+    --theme-primary-light: rgba(102, 187, 106, .9);
+    --theme-primary-dark: rgba(102, 187, 106, 1);
+    --theme-primary-fade: rgba(102, 187, 106, .5);
+    --theme-bg: #F0FFF4;
+    --theme-text: #2D3436;
+    --theme-text-light: #5B8B5B;
+    --theme-separator: #90B890;
+    --theme-love: #49A049;
+    --theme-shadow: rgba(102, 187, 106, .25);
+    --theme-btn-bg: rgba(102, 187, 106, .9);
+}
+
+/* 浪漫粉 */
+.theme-wrap.theme-pink {
+    --theme-primary: #EC407A;
+    --theme-primary-light: rgba(236, 64, 122, .9);
+    --theme-primary-dark: rgba(236, 64, 122, 1);
+    --theme-primary-fade: rgba(236, 64, 122, .5);
+    --theme-bg: #FFF0F5;
+    --theme-text: #4A4A4A;
+    --theme-text-light: #C0607A;
+    --theme-separator: #E8B0C0;
+    --theme-love: #EC407A;
+    --theme-shadow: rgba(236, 64, 122, .25);
+    --theme-btn-bg: rgba(236, 64, 122, .9);
+}
+
+/* 复古金 */
+.theme-wrap.theme-gold {
+    --theme-primary: #C9A227;
+    --theme-primary-light: rgba(201, 162, 39, .9);
+    --theme-primary-dark: rgba(201, 162, 39, 1);
+    --theme-primary-fade: rgba(201, 162, 39, .5);
+    --theme-bg: #FAF7F0;
+    --theme-text: #3E2723;
+    --theme-text-light: #8B7355;
+    --theme-separator: #B89A60;
+    --theme-love: #B8860B;
+    --theme-shadow: rgba(201, 162, 39, .25);
+    --theme-btn-bg: rgba(201, 162, 39, .9);
+}
+
+/* ===== 基础样式 ===== */
 page {
-    padding: 40rpx 0;
+    padding: 0;
     width: 100vw;
     box-sizing: border-box;
     font-size: 26rpx;
     font-family: PingFangSC-Light;
-    color: rgb(34, 34, 34);
     letter-spacing: 2rpx;
 }
 
-page > view {
+.theme-wrap {
+    padding: 40rpx 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    color: var(--theme-text);
+    background-color: var(--theme-bg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-wrap > view {
     padding: 0 40rpx;
 }
 
 .couple-cover {
     width: 268rpx;
     height: 426rpx;
+}
+
+/* ===== 主题切换面板样式 ===== */
+.theme-panel {
+    position: fixed;
+    top: 20rpx;
+    left: 20rpx;
+    z-index: 99999999;
+}
+
+.theme-toggle-btn {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    background-color: var(--theme-primary);
+    opacity: 0.85;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4rpx 16rpx var(--theme-shadow);
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.9);
+    opacity: 1;
+}
+
+.theme-toggle-icon {
+    font-size: 36rpx;
+    color: white;
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: 100rpx;
+    left: 0;
+    background-color: white;
+    border-radius: 20rpx;
+    box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, .15);
+    padding: 20rpx;
+    width: 280rpx;
+}
+
+.theme-dropdown-title {
+    font-size: 26rpx;
+    color: var(--theme-text);
+    text-align: center;
+    margin-bottom: 16rpx;
+    font-weight: 600;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    padding: 16rpx 12rpx;
+    border-radius: 12rpx;
+    margin-bottom: 8rpx;
+    transition: background-color 0.2s ease;
+}
+
+.theme-option:active {
+    background-color: #f5f5f5;
+}
+
+.theme-option.active {
+    background-color: var(--theme-bg);
+}
+
+.theme-color-dot {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+    border: 2rpx solid rgba(0, 0, 0, .1);
+}
+
+.theme-option-name {
+    flex: 1;
+    font-size: 26rpx;
+    color: var(--theme-text);
+}
+
+.theme-check {
+    width: 32rpx;
+    height: 32rpx;
+    color: var(--theme-primary);
+    font-size: 28rpx;
 }

@@ -14,12 +14,12 @@
 }
 
 .author {
-    color: rgb(91, 106, 145);
+    color: var(--theme-text-light);
     margin-right: 20rpx;
 }
 
 .date {
-    color: rgb(178, 178, 178);
+    color: var(--theme-separator);
 }
 
 .cover-wrap {
@@ -59,7 +59,7 @@
     align-items: center;
     margin: 60rpx 40rpx 88rpx;
     padding: 20rpx;
-    box-shadow: rgb(194, 194, 194) 0 0 10rpx;
+    box-shadow: 0 0 10rpx var(--theme-shadow);
     border-radius: 10rpx;
 }
 
@@ -252,7 +252,7 @@
 }
 
 .line {
-    border-top: 2rpx solid black;
+    border-top: 2rpx solid var(--theme-text);
     width: 114rpx;
     -webkit-transform: rotate(333deg);
     transform: rotate(333deg);
@@ -301,7 +301,7 @@
     line-height: 1;
     font-weight: bold;
     writing-mode: lr-tb;
-    color: rgb(133, 22, 14);
+    color: var(--theme-love);
 }
 
 .swiper-chinese {
@@ -315,7 +315,7 @@
 
 .location {
     border-radius: 20rpx;
-    box-shadow: rgb(153, 153, 153) 0 0 10rpx;
+    box-shadow: 0 0 10rpx var(--theme-shadow);
     padding: 20rpx;
     margin-left: 40rpx;
     margin-right: 40rpx;
@@ -349,7 +349,7 @@
 }
 
 .phone button {
-    background-color: rgba(133, 22, 14, .9);
+    background-color: var(--theme-btn-bg);
     border-radius: 20rpx;
     font-size: 24rpx;
     color: white;
@@ -366,7 +366,7 @@
 }
 
 .phone button:active {
-    background-color: rgba(133, 22, 14, 1);
+    background-color: var(--theme-primary-dark);
 }
 
 .phone button image {
@@ -390,7 +390,7 @@
     position: absolute;
     top: 4rpx;
     left: 16rpx;
-    color: #ed5566;
+    color: var(--theme-primary);
     line-height: 64rpx;
 }
 
@@ -434,7 +434,7 @@
     align-items: center;
     width: 448rpx !important;
     height: 64rpx;
-    background-color: rgba(133, 22, 14, .9);
+    background-color: var(--theme-btn-bg);
     border-radius: 28rpx;
     line-height: 1;
     color: white;
@@ -444,14 +444,15 @@
 }
 
 .form button:active {
-    background-color: rgba(133, 22, 14, 1);
+    background-color: var(--theme-primary-dark);
 }
 
 .tips {
     font-size: 32rpx;
     line-height: 1;
     padding: 10rpx;
-    background-color: #999999;
+    background-color: var(--theme-separator);
+    color: var(--theme-bg);
     display: inline-block;
     margin-bottom: 40rpx;
 }
@@ -522,7 +523,7 @@
 .greetings-item {
     padding: 14rpx 20rpx;
     color: white;
-    background: linear-gradient(90deg, rgba(133, 22, 14, .8) 0%, rgba(133, 22, 14, .5) 100%);
+    background: linear-gradient(90deg, var(--theme-btn-bg) 0%, var(--theme-primary-fade) 100%);
     border-radius: 10rpx;
     width: fit-content;
     word-wrap: break-word;
@@ -552,7 +553,7 @@
 .controller-btn {
     width: 60rpx;
     height: 60rpx;
-    background-color: rgba(133, 22, 14, 1);
+    background-color: var(--theme-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
