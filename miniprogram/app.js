@@ -1,6 +1,7 @@
 App({
     globalData: {
         isSinglePage: null, // 是否单页模式
+        currentTemplate: 'classic', // 当前模板：classic(经典) | mayday(五迷)
 
         // 以上变量都不用动，以下变量是需要修改的
 
@@ -47,6 +48,16 @@ App({
             env: 'xxxxxxx', // 云开发环境ID，在云开发控制台里可以查看
             traceUser: true
         })
+
+        // 从本地存储加载模板设置
+        const savedTpl = wx.getStorageSync('currentTemplate')
+        if (savedTpl) this.globalData.currentTemplate = savedTpl
+    },
+
+    // 切换模板
+    setTemplate(tpl) {
+        this.globalData.currentTemplate = tpl
+        wx.setStorageSync('currentTemplate', tpl)
     },
 
     // 小程序可见时，判断是否为单页模式

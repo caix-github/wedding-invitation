@@ -20,6 +20,21 @@ Page({
             greeting: ''
         },
         weddingTimeStr: [], // 格式化的婚礼日期列表
+        currentTemplate: APP.globalData.currentTemplate, // 当前模板
+
+        // 五迷模板素材
+        maydayImgs: {
+            mascot: '../../images/mayday/mascot.png',
+            announcement: '../../images/mayday/announcement.png',
+            scene: '../../images/mayday/scene.png',
+            calendarArt: '../../images/mayday/calendar-art.png',
+            characters: '../../images/mayday/characters.png',
+            couple: '../../images/mayday/couple.png',
+            cats: '../../images/mayday/cats.png',
+            network: '../../images/mayday/network.png',
+            peachBride: '../../images/mayday/peach-bride.png',
+            petLogo: '../../images/mayday/pet-logo.png'
+        },
 
         // 以上变量都不用动，以下变量是需要手动修改的
 
@@ -126,6 +141,11 @@ Page({
         this.music = null
         this.isSubmit = false
 
+        // 同步导航栏标题
+        if (this.data.currentTemplate === 'mayday') {
+            wx.setNavigationBarTitle({ title: 'May I LOVE U' })
+        }
+
         if (!isRemoved) {
             const db = wx.cloud.database()
             db.collection('surveys').get({
@@ -148,16 +168,18 @@ Page({
             })
         }
 
-        this.lunisolarDate = this.selectComponent('#calendar').lunisolarDate
-        this.setData({
-            weddingTimeStr: [
-                this.lunisolarDate.format('YYYY-MM-DD HH:mm'),
-                this.lunisolarDate.getSeason(),
-                this.lunisolarDate.format('YYYY年MM月DD号  HH:mm'),
-                this.lunisolarDate.format('农历lMlD  dddd'),
-                this.lunisolarDate.format('YYYY年MM月DD号')
-            ]
-        })
+        this.lunisolarDate = this.selectComponent('#calendar') ? this.selectComponent('#calendar').lunisolarDate : null
+        if (this.lunisolarDate) {
+            this.setData({
+                weddingTimeStr: [
+                    this.lunisolarDate.format('YYYY-MM-DD HH:mm'),
+                    this.lunisolarDate.getSeason(),
+                    this.lunisolarDate.format('YYYY年MM月DD号  HH:mm'),
+                    this.lunisolarDate.format('农历lMlD  dddd'),
+                    this.lunisolarDate.format('YYYY年MM月DD号')
+                ]
+            })
+        }
     },
 
     // 小程序卸载时，取消自动拉取祝福语定时器，销毁背景音乐
@@ -380,6 +402,23 @@ Page({
     goInfo() {
         wx.navigateTo({
             url: '../info/index'
+        })
+    },
+
+    // 切换模板
+    switchTemplate() {
+        const next = this.data.currentTemplate === 'classic' ? 'mayday' : 'classic'
+        APP.setTemplate(next)
+        this.setData({ currentTemplate: next })
+
+        // 更新导航栏标题
+        wx.setNavigationBarTitle({
+            title: next === 'mayday' ? 'May I LOVE U' : '许久未见·甚是想念'
+        })
+
+        wx.showToast({
+            title: next === 'mayday' ? '五迷模式' : '经典模式',
+            icon: 'none'
         })
     }
 })
