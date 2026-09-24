@@ -15,7 +15,7 @@ App({
         // const target = new Date('2023-11-08 08:00:00');
         // const isOver = Date.now() >= target.getTime();
         // console.log(isOver);
-        magic: Date.now() >= new Date('2026-09-22 19:00:00').getTime(),
+        magic: Date.now() >= new Date('2026-09-24 19:30:00').getTime(),
 
         // 婚礼日期时间
         weddingTime: '2026-11-18 17:00:00',

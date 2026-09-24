@@ -54,91 +54,140 @@
     height: 652rpx;
 }
 
-.music {
-    display: flex;
-    align-items: center;
-    margin: 60rpx 40rpx 88rpx;
-    padding: 20rpx;
-    box-shadow: rgb(194, 194, 194) 0 0 10rpx;
-    border-radius: 10rpx;
-}
-
-.music-controls {
+/* 音乐悬浮组件 */
+.music-float {
     position: fixed;
-    z-index: 99999999;
     top: 20rpx;
     right: 20rpx;
-    background-color: rgba(165, 165, 165, 0.2);
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+}
+
+.music-float-icon {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
     border-radius: 50%;
-    border: 4rpx solid white;
-    width: 56rpx;
-    height: 56rpx;
+    width: 72rpx;
+    height: 72rpx;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.35);
     -webkit-animation: mrotate 5s linear infinite;
     animation: mrotate 5s linear infinite;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
-.music-controls.paused {
+.music-float-icon.paused {
     -webkit-animation: none;
     animation: none;
+    background: linear-gradient(135deg, #ccc 0%, #ddd 100%);
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
 
-.music-controls.paused::after {
+.music-float-icon.paused::after {
     content: "";
-    width: 56rpx;
+    width: 72rpx;
     height: 0;
     position: absolute;
-    top: 26rpx;
+    top: 34rpx;
     left: 0;
-    border-top: 4rpx solid white;
+    border-top: 4rpx solid rgba(255, 255, 255, 0.8);
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
 
-.music-controls image {
+.music-float-icon image {
     width: 40rpx;
     height: 40rpx;
 }
 
-.music-left {
+.music-float-panel {
+    display: flex;
+    align-items: center;
+    margin-right: 12rpx;
+    padding: 10rpx 16rpx 10rpx 20rpx;
+    background: linear-gradient(135deg, #FFF5F0 0%, #FFF0EB 100%);
+    border: 2rpx solid rgba(255, 107, 107, 0.15);
+    border-radius: 36rpx;
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.15);
+    gap: 14rpx;
+    -webkit-animation: musicSlideIn 0.3s ease;
+    animation: musicSlideIn 0.3s ease;
+}
+
+@-webkit-keyframes musicSlideIn {
+    from { opacity: 0; transform: translateX(40rpx); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes musicSlideIn {
+    from { opacity: 0; transform: translateX(40rpx); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.music-float-info {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    gap: 4rpx;
 }
 
-.music-title {
-    font-size: 28rpx;
-    line-height: 1;
-    font-weight: bold;
-    padding: 12rpx 10rpx;
+.music-float-name {
+    font-size: 26rpx;
+    font-weight: 700;
+    color: #FF6B6B;
+    line-height: 1.2;
 }
 
-.music-desc {
-    font-size: 24rpx;
-    line-height: 1;
-    font-weight: normal;
-    opacity: 0.5;
-    padding: 12rpx 10rpx;
+.music-float-singer {
+    font-size: 22rpx;
+    color: #FF9800;
+    line-height: 1.2;
 }
 
-.music-right {
-    height: 116rpx;
+.music-float-poster {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 12rpx;
+    flex-shrink: 0;
+}
+
+.music-float-close {
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 36rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #FF6B6B;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.music-float-close:active {
+    background: rgba(255, 107, 107, 0.2);
+}
+
+/* 收起迷你状态 */
+.music-float-mini {
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    box-shadow: 0 4rpx 12rpx rgba(255, 107, 107, 0.3);
     display: flex;
-    gap: 12rpx;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
 }
 
-.music-status {
-    width: 32rpx;
-    height: 22rpx;
+.music-float-mini:active {
+    opacity: 1;
 }
 
-.music-poster {
-    width: 116rpx;
-    height: 116rpx;
+.music-float-mini-icon {
+    font-size: 22rpx;
 }
 
 .img-introduce {
@@ -264,17 +313,41 @@
 .img-map {
     display: flex;
     flex-direction: column;
-    gap: 40rpx;
+    gap: 6rpx;
+    position: relative;
+    border-radius: 16rpx;
+    overflow: hidden;
+    padding: 6rpx;
+    background: linear-gradient(135deg, #FFF0F0, #FFF8F0, #F0FFF0, #F0F8FF);
+    box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, .08);
 }
 
 .img-map-row {
     display: flex;
-    gap: 12rpx;
+    gap: 6rpx;
 }
 
 .img-map-item {
-    width: 384rpx;
-    height: 444rpx;
+    flex: 1;
+    height: 420rpx;
+    border-radius: 10rpx;
+}
+
+.img-map-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #fff;
+    background: linear-gradient(135deg, #E53935, #FF6B6B);
+    border-radius: 50%;
+    box-shadow: 0 4rpx 12rpx rgba(229, 57, 53, .3);
+    z-index: 10;
 }
 
 .swiper-outdoor {
@@ -621,51 +694,53 @@
 
 /* ===== 五迷模板样式 ===== */
 
-/* 封面 */
-.md-cover {
-    display: flex;
-    justify-content: center;
-    padding: 40rpx 0;
+/* 封面 Hero */
+.md-hero {
+    text-align: center;
+    padding: 60rpx 40rpx 60rpx;
+    background: linear-gradient(180deg, #FFEBEE 0%, #FFF5F5 60%, #FFF 100%);
 }
 
-.md-cover-img {
+.md-hero-img {
     width: 100%;
     max-width: 680rpx;
-    height: 680rpx;
+    height: 600rpx;
+    margin: 0 auto 40rpx;
+    border-radius: 20rpx;
 }
 
-/* 标题区 */
-.md-title-section {
-    text-align: center;
-    padding: 40rpx 40rpx 60rpx;
+.md-hero-deco {
+    font-size: 32rpx;
+    color: #E53935;
+    margin: 16rpx 0;
 }
 
-.md-title {
-    font-size: 44rpx;
-    font-weight: 700;
+.md-hero-title {
+    font-size: 56rpx;
+    font-weight: 800;
     color: #E53935;
     letter-spacing: 4rpx;
-    margin-bottom: 16rpx;
+    margin: 20rpx 0;
 }
 
-.md-subtitle {
-    font-size: 32rpx;
-    color: #FF6B6B;
+.md-hero-names {
+    font-size: 40rpx;
+    font-weight: 700;
+    color: #424242;
     letter-spacing: 3rpx;
-    margin-bottom: 16rpx;
+    margin: 20rpx 0;
 }
 
-.md-date {
+.md-hero-date {
     font-size: 26rpx;
     color: #999;
+    letter-spacing: 2rpx;
 }
 
-/* 吉祥物区 */
-.md-mascot-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40rpx;
+/* 卜卜吉祥物 */
+.md-mascot-block {
+    text-align: center;
+    padding: 60rpx 40rpx;
 }
 
 .md-mascot {
@@ -674,154 +749,385 @@
     margin-bottom: 30rpx;
 }
 
-.md-quote {
-    font-size: 40rpx;
-    font-weight: 700;
+.md-slogan {
+    font-size: 44rpx;
+    font-weight: 800;
     background: linear-gradient(90deg, #E53935, #FF8E53, #FFB74D);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 3rpx;
+    letter-spacing: 4rpx;
 }
 
-/* 通用段落 */
-.md-section {
-    text-align: center;
+.md-slogan-sub {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 12rpx;
+}
+
+/* 章节通用 */
+.md-chapter {
     padding: 60rpx 40rpx;
-    line-height: 1.8;
+    text-align: center;
+    position: relative;
+}
+
+.md-chapter-alt {
+    background: #FAFAFA;
+}
+
+.md-chapter-pink {
+    background: linear-gradient(180deg, #FFF0F5 0%, #FFE4EC 100%);
+    border-radius: 24rpx;
+    margin: 0 20rpx;
+}
+
+.md-chapter-green {
+    background: linear-gradient(180deg, #F0FFF4 0%, #E8F5E9 100%);
+    border-radius: 24rpx;
+    margin: 0 20rpx;
+}
+
+.md-chapter-num {
+    font-size: 56rpx;
+    font-weight: 800;
+    color: rgba(229, 57, 53, .15);
+    line-height: 1;
+    margin-bottom: 8rpx;
+}
+
+.md-chapter-title {
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #E53935;
+    letter-spacing: 4rpx;
+    margin-bottom: 40rpx;
+    position: relative;
+}
+
+.md-chapter-title::after {
+    content: '';
+    display: block;
+    width: 60rpx;
+    height: 4rpx;
+    background: #E53935;
+    margin: 16rpx auto 0;
+    border-radius: 2rpx;
+}
+
+/* 歌词段落 */
+.md-lyrics-block {
+    margin-bottom: 40rpx;
 }
 
 .md-lyric {
-    font-size: 28rpx;
-    color: #333;
+    font-size: 30rpx;
+    color: #424242;
     line-height: 2;
     letter-spacing: 2rpx;
 }
 
-.md-lyric-highlight {
+.md-lyric.md-accent {
     font-size: 32rpx;
     font-weight: 600;
     color: #E53935;
 }
 
-.md-large {
-    font-size: 40rpx;
+.md-lyric.md-large {
+    font-size: 42rpx;
     font-weight: 700;
     margin-bottom: 16rpx;
 }
 
-/* 装饰图片 */
-.md-decor-img {
+.md-lyric-sub {
+    font-size: 26rpx;
+    color: #888;
+    line-height: 2;
+    letter-spacing: 1rpx;
+}
+
+/* 章节图片 */
+.md-img-wide {
     width: 300rpx;
     height: 400rpx;
-    margin: 40rpx auto;
+    margin: 30rpx auto;
 }
 
-/* 全宽图片 */
-.md-full-img {
+.md-img-full {
     width: 100%;
-    border-radius: 16rpx;
-    margin-bottom: 40rpx;
-}
-
-/* 恋爱ing 粉色背景 */
-.md-pink-bg {
-    background: linear-gradient(180deg, #FFF0F5 0%, #FFE4EC 100%);
-    border-radius: 24rpx;
-    margin: 0 20rpx 60rpx;
-}
-
-.md-couple-img {
-    width: 500rpx;
-    height: 700rpx;
-    margin: 40rpx auto;
+    margin: 30rpx 0;
     border-radius: 16rpx;
 }
 
-/* 猫咪图 */
-.md-cats-img {
-    width: 500rpx;
-    height: 400rpx;
-    margin: 0 auto 40rpx;
+.md-img-couple {
+    width: 400rpx;
+    height: 560rpx;
+    margin: 30rpx auto;
 }
 
-/* 知足 绿色背景 */
-.md-green-bg {
-    background: linear-gradient(180deg, #F0FFF4 0%, #E8F5E9 100%);
-    border-radius: 24rpx;
-    margin: 0 20rpx 60rpx;
+/* CHEERS 区 */
+.md-cheers-block {
+    text-align: center;
+    padding: 60rpx 40rpx;
 }
 
-.md-network-img {
-    width: 600rpx;
-    height: 500rpx;
-    margin: 40rpx auto;
-}
-
-/* 日历区 */
-.md-calendar-title {
-    font-size: 36rpx;
+.md-cheers-text {
+    font-size: 32rpx;
     font-weight: 700;
-    color: #B71C1C;
-    letter-spacing: 6rpx;
-    margin-bottom: 30rpx;
+    color: #E53935;
+    margin-top: 30rpx;
+    letter-spacing: 3rpx;
 }
 
-.md-calendar-img {
+/* 婚纱照轮播 */
+.md-photo-swiper {
+    padding: 0 40rpx 60rpx;
+    background: transparent;
+}
+
+.md-swiper {
     width: 100%;
-    border-radius: 16rpx;
-    margin-bottom: 30rpx;
+    height: 480rpx;
+    border-radius: 20rpx;
+    overflow: hidden;
+    background: transparent;
 }
 
-.md-date-large {
-    font-size: 34rpx;
+.md-swiper-img {
+    width: 100%;
+    height: 480rpx;
+}
+
+.md-swiper-caption {
+    text-align: center;
+    font-size: 26rpx;
+    color: #999;
+    margin-top: 20rpx;
+    letter-spacing: 2rpx;
+}
+
+/* 婚纱四宫格 */
+.md-photo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6rpx;
+    position: relative;
+    margin: 0 40rpx 60rpx;
+    border-radius: 20rpx;
+    overflow: hidden;
+    padding: 0;
+    background: transparent;
+}
+
+.md-grid-row {
+    display: flex;
+    gap: 6rpx;
+}
+
+.md-grid-item {
+    flex: 1;
+    height: 400rpx;
+    border-radius: 10rpx;
+}
+
+.md-grid-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #fff;
+    background: linear-gradient(135deg, #E53935, #FF6B6B);
+    border-radius: 50%;
+    box-shadow: 0 4rpx 12rpx rgba(229, 57, 53, .3);
+    z-index: 10;
+}
+
+/* 新郎新娘独照 */
+.md-couple-photos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40rpx;
+    padding: 0 40rpx 60rpx;
+}
+
+.md-couple-photo-item {
+    text-align: center;
+}
+
+.md-solo-photo {
+    width: 260rpx;
+    height: 340rpx;
+    border-radius: 20rpx;
+    margin-bottom: 16rpx;
+}
+
+.md-solo-name {
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #E53935;
+    letter-spacing: 2rpx;
+}
+
+.md-solo-role {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 4rpx;
+}
+
+.md-couple-heart {
+    font-size: 40rpx;
+    color: #E53935;
+    font-weight: 700;
+}
+
+/* 婚纱长图 */
+.md-series-photos {
+    padding: 0 40rpx 60rpx;
+}
+
+.md-series-photos .md-img-full {
+    margin: 16rpx 0;
+    border-radius: 16rpx;
+}
+
+/* 日历艺术图 */
+.md-calendar-art {
+    width: 100%;
+    margin: 0 auto 30rpx;
+    border-radius: 16rpx;
+}
+
+/* 邀请函 logo */
+.md-invite-logo {
+    width: 300rpx;
+    height: 200rpx;
+    margin: 0 auto;
+}
+
+/* 温馨提示图 */
+.md-tips-img {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 0 auto 24rpx;
+}
+
+/* SAVE THE DATE */
+.md-save-date {
+    text-align: center;
+    padding: 80rpx 40rpx;
+    background: #FFF8F8;
+}
+
+.md-save-date-title {
+    font-size: 40rpx;
+    font-weight: 800;
+    color: #B71C1C;
+    letter-spacing: 8rpx;
+    margin-bottom: 16rpx;
+}
+
+.md-save-date-deco {
+    width: 80rpx;
+    height: 6rpx;
+    background: #E53935;
+    margin: 0 auto 40rpx;
+    border-radius: 3rpx;
+}
+
+.md-save-date-main {
+    font-size: 36rpx;
     font-weight: 600;
     color: #333;
     margin-top: 20rpx;
 }
 
-.md-date-sub {
+.md-save-date-sub {
     font-size: 26rpx;
     color: #888;
     margin-top: 8rpx;
 }
 
-/* 邀请函区 */
-.md-invite-bg {
+/* 邀请函卡片 */
+.md-invite-card {
+    margin: 60rpx 40rpx;
+    padding: 60rpx 40rpx;
     background: linear-gradient(180deg, #FFFDE7 0%, #FFF8E1 100%);
     border-radius: 24rpx;
-    margin: 0 20rpx 60rpx;
+    text-align: center;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, .06);
 }
 
-.md-invite-title {
-    font-size: 32rpx;
-    font-weight: 600;
+.md-invite-header {
+    font-size: 30rpx;
+    font-weight: 700;
     color: #F57C00;
-    letter-spacing: 4rpx;
-    margin-bottom: 30rpx;
-    text-transform: uppercase;
+    letter-spacing: 6rpx;
 }
 
-.md-pet-logo {
-    width: 400rpx;
-    height: 300rpx;
-    margin: 40rpx auto;
+.md-invite-deco-line {
+    width: 100%;
+    height: 2rpx;
+    background: linear-gradient(90deg, transparent, #F57C00, transparent);
+    margin: 30rpx 0;
+}
+
+.md-invite-body {
+    padding: 20rpx 0;
+}
+
+.md-invite-names {
+    font-size: 40rpx;
+    font-weight: 700;
+    color: #E53935;
+    margin-bottom: 30rpx;
+    letter-spacing: 3rpx;
+}
+
+.md-invite-text {
+    font-size: 28rpx;
+    color: #555;
+    line-height: 2;
+    letter-spacing: 2rpx;
+}
+
+.md-invite-text.md-accent {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #E53935;
+    margin-top: 12rpx;
+}
+
+.md-invite-footer {
+    text-align: center;
+    padding-top: 10rpx;
 }
 
 /* 温馨提示 */
-.md-tips {
-    display: inline-block;
-    font-size: 28rpx;
-    background: linear-gradient(90deg, #FF6B6B, #FF8E53);
-    color: white;
-    padding: 12rpx 32rpx;
-    border-radius: 30rpx;
-    margin-bottom: 30rpx;
-    font-weight: 600;
+.md-tips-card {
+    margin: 60rpx 40rpx;
+    padding: 48rpx 40rpx;
+    background: #FAFAFA;
+    border-radius: 24rpx;
+    text-align: center;
+    border-left: 8rpx solid #FF8E53;
+}
+
+.md-tips-label {
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #FF6B6B;
+    margin-bottom: 24rpx;
+    letter-spacing: 2rpx;
 }
 
 /* 结尾 */
-.md-footer {
+.md-ending {
     text-align: center;
     padding: 80rpx 40rpx 120rpx;
     background: linear-gradient(180deg, #FFF5F5 0%, #FFEBEE 100%);
@@ -829,16 +1135,23 @@
     margin: 0 20rpx;
 }
 
-.md-footer-lyric {
-    font-size: 28rpx;
+.md-ending-lyric {
+    font-size: 30rpx;
     color: #555;
-    line-height: 2;
+    line-height: 2.2;
+    letter-spacing: 2rpx;
 }
 
-.md-footer-sign {
+.md-ending-lyric.md-accent {
     font-size: 32rpx;
+    font-weight: 600;
+    color: #E53935;
+}
+
+.md-ending-sign {
+    font-size: 36rpx;
     font-weight: 700;
     color: #E53935;
-    margin-top: 30rpx;
-    letter-spacing: 3rpx;
+    margin-top: 40rpx;
+    letter-spacing: 4rpx;
 }

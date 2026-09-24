@@ -13,6 +13,8 @@ Page({
         ...APP.globalData,
         isManager: false, // 当前用户是否为管理员
         musicIsPaused: false, // 是否暂停背景音乐
+        musicExpanded: false, // 音乐面板是否展开
+        musicClosed: false, // 音乐组件是否被手动关闭
         activeIdx: isRemoved ? 0 : -1, // 祝福语轮播用，当前显示的祝福语索引值
         form: { // 表单信息
             name: '',
@@ -24,16 +26,16 @@ Page({
 
         // 五迷模板素材
         maydayImgs: {
-            mascot: '../../images/mayday/mascot.png',
-            announcement: '../../images/mayday/announcement.png',
-            scene: '../../images/mayday/scene.png',
-            calendarArt: '../../images/mayday/calendar-art.png',
-            characters: '../../images/mayday/characters.png',
-            couple: '../../images/mayday/couple.png',
-            cats: '../../images/mayday/cats.png',
-            network: '../../images/mayday/network.png',
-            peachBride: '../../images/mayday/peach-bride.png',
-            petLogo: '../../images/mayday/pet-logo.png'
+            mascot: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/mascot.png',
+            announcement: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/announcement.png',
+            scene: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/scene.png',
+            calendarArt: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/calendar-art.png',
+            characters: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/characters.png',
+            couple: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/couple.png',
+            cats: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cats.png',
+            network: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/network.png',
+            peachBride: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/peach-bride.png',
+            petLogo: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/pet-logo.png'
         },
 
         // 以上变量都不用动，以下变量是需要手动修改的
@@ -52,19 +54,31 @@ Page({
             }
         ] : [],
 
-        // 背景音乐（默认用陈奕迅的《I DO》，想换的话自己去找音频资源，我是在「婚贝」上找的）
+        // 背景音乐
+        classicMusic: {
+            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3', // 音频资源链接
+            name: '有点甜', // 歌名
+            singer: '汪苏泷' // 歌手名
+        },
+        // 五迷模板背景音乐（五月天《最重要的小事》）
+        maydayMusic: {
+            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac', // 五月天 - 最重要的小事
+            name: '最重要的小事',
+            singer: '五月天'
+        },
+        // 当前播放的音乐（根据模板动态切换）
         music: {
-            src: 'https://amp3.hunbei.com/mp3/IDo_ChenYiXun.mp3', // 音频资源链接
-            name: 'I DO', // 歌名
-            singer: '陈奕迅' // 歌手名
+            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3',
+            name: '有点甜',
+            singer: '汪苏泷'
         },
 
         // 酒店信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
-            name: '婚宴酒店名XXXXXXXX',
-            address: '详细地址XXXXXXXXXXXXXXX',
-            latitude: 23.03387641906739,
-            longitude: 113.7241439819336
+            name: '婚宴酒店名',
+            address: '详细地址',
+            latitude: 23.543778,
+            longitude: 116.355733
         }])[0],
 
         // 图片信息（其实就是婚纱照了）
@@ -215,10 +229,16 @@ Page({
     // 小程序可用时，初始化背景音乐并自动播放
     onReady() {
         if (this.music === null) {
+            // 根据当前模板选择音乐
+            const tpl = this.data.currentTemplate
+            const initMusic = tpl === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
+            if (tpl === 'mayday') {
+                this.setData({ music: initMusic })
+            }
             this.music = wx.createInnerAudioContext({
                 useWebAudioImplement: false
             })
-            this.music.src = this.data.music.src
+            this.music.src = initMusic.src
             this.music.loop = true
             this.music.autoplay = this.data.magic
         }
@@ -238,6 +258,36 @@ Page({
             title: '好久不见，婚礼见٩(๑^o^๑)۶',
             imageUrl: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/shareTimeline.jpg'
         }
+    },
+
+    // 点击音乐图标展开/收起面板
+    toggleMusicPanel() {
+        this.setData({
+            musicExpanded: !this.data.musicExpanded
+        })
+    },
+
+    // 关闭音乐组件
+    closeMusic() {
+        if (this.music) {
+            this.music.pause()
+        }
+        this.setData({
+            musicClosed: true,
+            musicExpanded: false,
+            musicIsPaused: true
+        })
+    },
+
+    // 重新打开音乐组件
+    reopenMusic() {
+        if (this.music && this.music.paused) {
+            this.music.play()
+        }
+        this.setData({
+            musicClosed: false,
+            musicIsPaused: false
+        })
     },
 
     // 点击右上角音乐按钮控制音频播放和暂停
@@ -409,7 +459,30 @@ Page({
     switchTemplate() {
         const next = this.data.currentTemplate === 'classic' ? 'mayday' : 'classic'
         APP.setTemplate(next)
-        this.setData({ currentTemplate: next })
+
+        // 切换音乐
+        const targetMusic = next === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
+        const wasPlaying = this.music && !this.music.paused
+
+        // 销毁旧音乐
+        if (this.music !== null) {
+            this.music.destroy()
+            this.music = null
+        }
+
+        // 创建新音乐
+        this.music = wx.createInnerAudioContext({
+            useWebAudioImplement: false
+        })
+        this.music.src = targetMusic.src
+        this.music.loop = true
+        this.music.autoplay = wasPlaying || this.data.magic
+
+        this.setData({
+            currentTemplate: next,
+            musicIsPaused: !wasPlaying,
+            music: targetMusic
+        })
 
         // 更新导航栏标题
         wx.setNavigationBarTitle({
@@ -417,8 +490,9 @@ Page({
         })
 
         wx.showToast({
-            title: next === 'mayday' ? '五迷模式' : '经典模式',
-            icon: 'none'
+            title: next === 'mayday' ? '五迷模式 · 最重要的小事' : '经典模式 · I DO',
+            icon: 'none',
+            duration: 2000
         })
     }
 })
