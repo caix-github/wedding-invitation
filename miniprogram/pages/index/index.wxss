@@ -65,6 +65,7 @@
 }
 
 .music-float-icon {
+    position: relative;
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
     border-radius: 50%;
     width: 72rpx;
@@ -77,6 +78,16 @@
     animation: mrotate 5s linear infinite;
     overflow: hidden;
     flex-shrink: 0;
+}
+
+@-webkit-keyframes mrotate {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes mrotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .music-float-icon.paused {

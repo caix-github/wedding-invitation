@@ -56,13 +56,13 @@ Page({
 
         // 背景音乐
         classicMusic: {
-            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3', // 音频资源链接
+            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3', // 音频资源链接
             name: '有点甜', // 歌名
             singer: '汪苏泷' // 歌手名
         },
         // 五迷模板背景音乐（五月天《最重要的小事》）
         maydayMusic: {
-            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac', // 五月天 - 最重要的小事
+            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac', // 五月天 - 最重要的小事
             name: '最重要的小事',
             singer: '五月天'
         },
@@ -232,15 +232,25 @@ Page({
             // 根据当前模板选择音乐
             const tpl = this.data.currentTemplate
             const initMusic = tpl === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
-            if (tpl === 'mayday') {
-                this.setData({ music: initMusic })
-            }
+            this.setData({
+                music: initMusic,
+                musicIsPaused: !this.data.magic
+            })
             this.music = wx.createInnerAudioContext({
                 useWebAudioImplement: false
             })
             this.music.src = initMusic.src
             this.music.loop = true
-            this.music.autoplay = this.data.magic
+
+            // 错误监听
+            this.music.onError((err) => {
+                console.error('音乐播放错误:', err)
+            })
+
+            // magic为true时自动播放
+            if (this.data.magic) {
+                this.music.play()
+            }
         }
     },
 
@@ -460,9 +470,9 @@ Page({
         const next = this.data.currentTemplate === 'classic' ? 'mayday' : 'classic'
         APP.setTemplate(next)
 
-        // 切换音乐
+        // 切换音乐：magic为true时自动播放（除非用户手动关闭了音乐）
         const targetMusic = next === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
-        const wasPlaying = this.music && !this.music.paused
+        const shouldPlay = this.data.magic && !this.data.musicClosed
 
         // 销毁旧音乐
         if (this.music !== null) {
@@ -476,11 +486,18 @@ Page({
         })
         this.music.src = targetMusic.src
         this.music.loop = true
-        this.music.autoplay = wasPlaying || this.data.magic
+
+        this.music.onError((err) => {
+            console.error('音乐播放错误:', err)
+        })
+
+        if (shouldPlay) {
+            this.music.play()
+        }
 
         this.setData({
             currentTemplate: next,
-            musicIsPaused: !wasPlaying,
+            musicIsPaused: !shouldPlay,
             music: targetMusic
         })
 
