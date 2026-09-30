@@ -33,7 +33,7 @@ Page({
             characters: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/characters.png',
             couple: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/couple.png',
             cats: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cats.png',
-            network: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/network.png',
+            network: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/network1.png',
             peachBride: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/peach-bride.png',
             petLogo: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/pet-logo.png'
         },

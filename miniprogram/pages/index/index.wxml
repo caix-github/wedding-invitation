@@ -281,6 +281,25 @@
     <view class="md-hero-deco">♡</view>
 </view>
 
+<!-- 新郎新娘独照 -->
+<view class="md-couple-photos">
+    <view class="md-couple-photo-item">
+        <view class="md-solo-ring">
+            <image class="md-solo-photo" src="{{ imgs.husband }}" mode="aspectFill" />
+        </view>
+        <view class="md-solo-name">{{ couple[0].name }}</view>
+        <view class="md-solo-role">新郎</view>
+    </view>
+    <view class="md-couple-heart">♡</view>
+    <view class="md-couple-photo-item">
+        <view class="md-solo-ring">
+            <image class="md-solo-photo" src="{{ imgs.wife }}" mode="aspectFill" />
+        </view>
+        <view class="md-solo-name">{{ couple[1].name }}</view>
+        <view class="md-solo-role">新娘</view>
+    </view>
+</view>
+
 <!-- 卜卜吉祥物 + 标语 -->
 <view class="md-mascot-block">
     <image class="md-mascot" src="{{ maydayImgs.mascot }}" mode="aspectFit" />
@@ -358,12 +377,6 @@
     <image class="md-img-full" src="{{ maydayImgs.network }}" mode="widthFix" />
 </view>
 
-<!-- CHEERS 角色集合 -->
-<view class="md-cheers-block">
-    <image class="md-img-full" src="{{ maydayImgs.characters }}" mode="widthFix" />
-    <view class="md-cheers-text">CHEERS! May I LOVE U</view>
-</view>
-
 <!-- 婚纱四宫格 -->
 <view class="md-photo-grid">
     <view class="md-grid-row">
@@ -377,19 +390,10 @@
     <view class="md-grid-center">❤</view>
 </view>
 
-<!-- 新郎新娘独照 -->
-<view class="md-couple-photos">
-    <view class="md-couple-photo-item">
-        <image class="md-solo-photo" src="{{ imgs.husband }}" mode="aspectFill" />
-        <view class="md-solo-name">{{ couple[0].name }}</view>
-        <view class="md-solo-role">新郎</view>
-    </view>
-    <view class="md-couple-heart">&</view>
-    <view class="md-couple-photo-item">
-        <image class="md-solo-photo" src="{{ imgs.wife }}" mode="aspectFill" />
-        <view class="md-solo-name">{{ couple[1].name }}</view>
-        <view class="md-solo-role">新娘</view>
-    </view>
+<!-- CHEERS 角色集合 -->
+<view class="md-cheers-block">
+    <image class="md-img-full" src="{{ maydayImgs.characters }}" mode="widthFix" />
+    <view class="md-cheers-text">CHEERS! May I LOVE U</view>
 </view>
 
 <!-- 婚纱长图 -->
