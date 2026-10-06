@@ -15,7 +15,7 @@ App({
         // const target = new Date('2023-11-08 08:00:00');
         // const isOver = Date.now() >= target.getTime();
         // console.log(isOver);
-        magic: Date.now() >= new Date('2026-10-01 19:30:00').getTime(),
+        magic: Date.now() >= new Date('2026-10-03 19:30:00').getTime(),
 
         // 婚礼日期时间
         weddingTime: '2026-11-19 17:00:00',
@@ -28,7 +28,7 @@ App({
             number: '13670401092', // 手机号码
             birthday: '1995.08.21' // 出生日期
         }, {
-            image: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife-info.jpg', // 新娘单人照
+            image: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife.jpg', // 新娘单人照
             name: '何洁琼', // 姓名
             alias: '新娘', // 称谓
             number: '13169642658', // 手机号码

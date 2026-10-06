@@ -56,9 +56,9 @@ Page({
 
         // 背景音乐
         classicMusic: {
-            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3', // 音频资源链接
-            name: '有点甜', // 歌名
-            singer: '汪苏泷' // 歌手名
+            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac', // 音频资源链接
+            name: '是你', // 歌名
+            singer: '梦然' // 歌手名
         },
         // 五迷模板背景音乐（五月天《最重要的小事》）
         maydayMusic: {
@@ -68,17 +68,17 @@ Page({
         },
         // 当前播放的音乐（根据模板动态切换）
         music: {
-            src: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3',
-            name: '有点甜',
-            singer: '汪苏泷'
+          src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac', // 音频资源链接
+          name: '是你', // 歌名
+          singer: '梦然' // 歌手名
         },
 
         // 酒店信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
-            name: '婚宴酒店名',
+            name: '家有婚宴',
             address: '详细地址',
-            latitude: 23.543778,
-            longitude: 116.355733
+            latitude: 23.5128675,
+            longitude: 116.4873721
         }])[0],
 
         // 图片信息（其实就是婚纱照了）
@@ -86,42 +86,58 @@ Page({
             // 封面图
             // cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
             cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
+            cover1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover1.jpg',
 
             // 音乐封面
             poster: 'https://res.wx.qq.com/t/fed_upload/d811d254-e5d6-4c19-9ff8-77c4b6128137/poster.jpg',
 
             // 新郎独照
-            husband: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/husband.jpg',
+            husband: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/husband-1.jpg',
 
             // 新娘独照
-            wife: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife.jpg',
+            wife: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife-1.jpg',
 
             // 轮播图1
             swiper1: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-2.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-3.jpg'
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-1-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-2-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-3-1.jpg'
+            ],
+
+            // 五迷模式轮播图1
+            swiperWmls1: [
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-1.jpg',
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-3.jpg'
             ],
 
             // 连续图
             series: [
                 '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series2.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series3.jpg'
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series2-1.jpg',
+                // '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series3.jpg'
+            ],
+
+            // 连续图
+            serieswmls: [
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls1.jpg',
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls2.jpg',
+              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls3.jpg'
             ],
 
             // 左上图
             leftUp: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up.jpg',
+            leftUp1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up1.jpg',
 
             // 左下图
             leftDown: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-down.jpg',
 
             // 四宫图
             map: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map2.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map3.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map4.jpg'
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map1-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map2-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map3-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map4-1.jpg'
             ],
 
             // 轮播图2
@@ -132,17 +148,17 @@ Page({
             ],
 
             // 轮播图2下方常驻图
-            swiper2Static: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-static.jpg',
+            swiper2Static: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-static-1.jpg',
 
             // 轮播图3
             swiper3: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper3-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper3-2.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper3-3.jpg'
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-1-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-2-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-3-1.jpg'
             ],
 
             // 结尾图1
-            end1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/end1.jpg',
+            end1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
 
             // 结尾图2
             end2: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/end2.jpg'
@@ -258,7 +274,7 @@ Page({
     onShareAppMessage() {
         return {
             title: '好久不见，婚礼见٩(๑^o^๑)۶',
-            imageUrl: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/shareAppMsg.jpg'
+            imageUrl: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/shareAppMsg.jpg'
         }
     },
 
@@ -266,7 +282,7 @@ Page({
     onShareTimeline() {
         return {
             title: '好久不见，婚礼见٩(๑^o^๑)۶',
-            imageUrl: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/shareTimeline.jpg'
+            imageUrl: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/shareAppMsg.jpg'
         }
     },
 

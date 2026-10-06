@@ -790,13 +790,13 @@
 .md-chapter-pink {
     background: linear-gradient(180deg, #FFF0F5 0%, #FFE4EC 100%);
     border-radius: 24rpx;
-    margin: 0 20rpx;
+    margin: 0 40rpx;
 }
 
 .md-chapter-green {
     background: linear-gradient(180deg, #F0FFF4 0%, #E8F5E9 100%);
     border-radius: 24rpx;
-    margin: 0 20rpx;
+    margin: 0 40rpx;
 }
 
 .md-chapter-num {
@@ -924,7 +924,7 @@
     flex-direction: column;
     gap: 16rpx;
     position: relative;
-    margin: 0 40rpx 80rpx;
+    margin: 20rpx 40rpx;
     padding: 0;
     background: transparent;
 }
@@ -963,7 +963,7 @@
     justify-content: center;
     align-items: center;
     gap: 60rpx;
-    padding: 0 40rpx 80rpx;
+    padding: 40rpx;
 }
 
 .md-couple-photo-item {
@@ -972,7 +972,7 @@
 
 .md-solo-ring {
     width: 240rpx;
-    height: 240rpx;
+    height: 300rpx;
     border-radius: 50%;
     padding: 10rpx;
     background: linear-gradient(135deg, #FFF0F0, #FFE8E0, #FFF0F0);
@@ -1001,9 +1001,10 @@
 }
 
 .md-couple-heart {
-    font-size: 36rpx;
+    font-size: 68rpx;
     color: #E53935;
-    opacity: 0.5;
+    opacity: 0.9;
+    text-shadow: 0 4rpx 8rpx rgba(255, 232, 224, 0.95);
     margin-top: -60rpx;
 }
 

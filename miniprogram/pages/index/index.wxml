@@ -22,7 +22,6 @@
                 <view class="music-float-name">{{ music.name }}</view>
                 <view class="music-float-singer">{{ music.singer }} · {{ musicIsPaused ? '已暂停' : '播放中' }}</view>
             </view>
-            <image class="music-float-poster" src="{{ imgs.poster }}" mode="aspectFit" />
             <view class="music-float-close" bindtap="closeMusic">×</view>
         </view>
     </block>
@@ -44,7 +43,7 @@
     <image class="img-cover-word" src="https://h5cdn.hunbei.com/editorCustomPic/2023-5-5-XpF8Q3dtRTsbfzTY8WwBwFWpDhiGPe5k?imageMogr2/auto-orient/thumbnail/747x693>" mode="aspectFit" />
     <view class="cover">
         <image class="img-invitation" src="https://h5cdn.hunbei.com/editorCustomPic/2022-11-4-N87SPKmaSQW7kZ3i7ZH4QHeMXpYhZzDs.png?imageMogr2/auto-orient/crop/!1455x384a457a363/quality/90|imageMogr2/thumbnail/659x174>" mode="aspectFit" />
-        <image class="img-cover" src="{{ imgs.cover }}" mode="aspectFit" />
+        <image class="img-cover" src="{{ imgs.cover1 }}" mode="aspectFit" />
     </view>
     <view class="lh15">斯人若如虹，遇上方知有</view>
 </view>
@@ -62,7 +61,7 @@
     <view>❤</view>
 </view>
 
-<view class="tc lh21 mb100">
+<!-- <view class="tc lh21 mb100">
     <image class="img-introduce" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-22-WNhBXi3ty4fw7dwFBxSZneDKYtz754ya.png?imageMogr2/auto-orient/thumbnail/542.00x58.84>" mode="aspectFit" />
     <view class="moon">
         <image class="img-moon" src="https://h5cdn.hunbei.com/editorCustomPic/2022-2-16-6xEP56tzDiPX53f4WZbAYR3pmwAZB7M7.png?imageMogr2/auto-orient/thumbnail/310.00x465.00>" mode="aspectFit" />
@@ -74,7 +73,7 @@
     <view>出生时的月亮</view>
     <view>Random luck in universe</view>
     <view>宇宙间相遇的浪漫</view>
-</view>
+</view> -->
 
 <view class="husband lh21 mb100">
     <image class="img-husband" src="{{ imgs.husband }}" mode="aspectFit" />
@@ -129,7 +128,7 @@
 
 <view class="leaf lh21 mb152">
     <view class="img-row mb28">
-        <image class="img-leaf-left" src="{{ imgs.leftUp }}" mode="aspectFit" />
+        <image class="img-leaf-left" src="{{ imgs.leftUp1 }}" mode="aspectFit" />
         <image class="img-leaf" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-2-k8yzidKa4XYnCZdMDQWfGmaxzXreeAeP.png?imageMogr2/auto-orient/thumbnail/624x493>/format/webp" mode="aspectFit" />
     </view>
     <view class="img-row tc pr40">
@@ -278,7 +277,7 @@
     <view class="md-hero-title">We're married!</view>
     <view class="md-hero-names">{{ couple[0].name }} & {{ couple[1].name }}</view>
     <view class="md-hero-date">{{ weddingTimeStr[0] }}</view>
-    <view class="md-hero-deco">♡</view>
+    <!-- <view class="md-hero-deco">♡</view> -->
 </view>
 
 <!-- 新郎新娘独照 -->
@@ -301,11 +300,11 @@
 </view>
 
 <!-- 卜卜吉祥物 + 标语 -->
-<view class="md-mascot-block">
+<!-- <view class="md-mascot-block">
     <image class="md-mascot" src="{{ maydayImgs.mascot }}" mode="aspectFit" />
     <view class="md-slogan">May I LOVE U</view>
     <view class="md-slogan-sub">—— 五月天</view>
-</view>
+</view> -->
 
 <!-- 章节1：最重要的小事 -->
 <view class="md-chapter">
@@ -334,7 +333,7 @@
 <!-- 婚纱照轮播 -->
 <view class="md-photo-swiper">
     <swiper class="md-swiper" autoplay circular interval="3000" easing-function="easeInOut" indicator-dots indicator-color="rgba(229,57,53,.2)" indicator-active-color="#E53935">
-        <swiper-item wx:for="{{ imgs.swiper1 }}" wx:key="*this">
+        <swiper-item wx:for="{{ imgs.swiperWmls1 }}" wx:key="*this">
             <image class="md-swiper-img" src="{{ item }}" mode="aspectFill" />
         </swiper-item>
     </swiper>
@@ -398,7 +397,7 @@
 
 <!-- 婚纱长图 -->
 <view class="md-series-photos">
-    <image class="md-img-full" wx:for="{{ imgs.series }}" wx:key="*this" src="{{ item }}" mode="widthFix" />
+    <image class="md-img-full" wx:for="{{ imgs.serieswmls }}" wx:key="*this" src="{{ item }}" mode="widthFix" />
 </view>
 
 <!-- SAVE THE DATE -->
@@ -472,10 +471,10 @@
 
 <!-- 结尾 -->
 <view class="md-ending">
-    <view class="md-ending-lyric">后来的我们</view>
-    <view class="md-ending-lyric">依然走着</view>
-    <view class="md-ending-lyric">只是不再并肩了</view>
-    <view class="md-ending-lyric md-accent">朝各自的人生追寻了</view>
+    <view class="md-ending-lyric">因为你</view>
+    <view class="md-ending-lyric">所以我</view>
+    <view class="md-ending-lyric">那是你 牵着我</view>
+    <view class="md-ending-lyric md-accent">你和我用最小回忆堆成宇宙</view>
     <view class="md-ending-sign">{{ couple[0].name }} & {{ couple[1].name }}</view>
 </view>
 
