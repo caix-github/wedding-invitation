@@ -61,20 +61,6 @@
     <view>❤</view>
 </view>
 
-<!-- <view class="tc lh21 mb100">
-    <image class="img-introduce" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-22-WNhBXi3ty4fw7dwFBxSZneDKYtz754ya.png?imageMogr2/auto-orient/thumbnail/542.00x58.84>" mode="aspectFit" />
-    <view class="moon">
-        <image class="img-moon" src="https://h5cdn.hunbei.com/editorCustomPic/2022-2-16-6xEP56tzDiPX53f4WZbAYR3pmwAZB7M7.png?imageMogr2/auto-orient/thumbnail/310.00x465.00>" mode="aspectFit" />
-        <image class="img-moon" src="https://h5cdn.hunbei.com/editorCustomPic/2022-2-16-TaHn8RGyJTdcwF5HGPkxrrifeFPNmPek.png?imageMogr2/auto-orient/thumbnail/310.00x464.11>" mode="aspectFit" />
-        <view class="birthday">
-            <text wx:for="{{ couple }}" wx:key="name">{{ item.birthday }}</text>
-        </view>
-    </view>
-    <view>出生时的月亮</view>
-    <view>Random luck in universe</view>
-    <view>宇宙间相遇的浪漫</view>
-</view> -->
-
 <view class="husband lh21 mb100">
     <image class="img-husband" src="{{ imgs.husband }}" mode="aspectFit" />
     <view class="husband-desc">
