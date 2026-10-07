@@ -1,66 +1,7 @@
 App({
     globalData: {
         isSinglePage: null, // 是否单页模式
-        
-        // 主题配置
-        currentTheme: 'theme-red', // 当前主题
-        themes: {
-            'theme-red': {
-                name: '中国红',
-                primary: '#85160E',
-                primaryLight: 'rgba(133, 22, 14, .9)',
-                primaryDark: 'rgba(133, 22, 14, 1)',
-                bg: '#ffffff',
-                text: '#222222',
-                textLight: 'rgb(91, 106, 145)',
-                separator: 'rgb(178, 178, 178)',
-                loveColor: 'rgb(133, 22, 14)'
-            },
-            'theme-orange': {
-                name: '清新橙',
-                primary: '#FF7043',
-                primaryLight: 'rgba(255, 112, 67, .9)',
-                primaryDark: 'rgba(255, 112, 67, 1)',
-                bg: '#FFF8F0',
-                text: '#333333',
-                textLight: '#8B6914',
-                separator: '#E0A87A',
-                loveColor: '#FF7043'
-            },
-            'theme-green': {
-                name: '文艺绿',
-                primary: '#66BB6A',
-                primaryLight: 'rgba(102, 187, 106, .9)',
-                primaryDark: 'rgba(102, 187, 106, 1)',
-                bg: '#F0FFF4',
-                text: '#2D3436',
-                textLight: '#5B8B5B',
-                separator: '#90B890',
-                loveColor: '#49A049'
-            },
-            'theme-pink': {
-                name: '浪漫粉',
-                primary: '#EC407A',
-                primaryLight: 'rgba(236, 64, 122, .9)',
-                primaryDark: 'rgba(236, 64, 122, 1)',
-                bg: '#FFF0F5',
-                text: '#4A4A4A',
-                textLight: '#C0607A',
-                separator: '#E8B0C0',
-                loveColor: '#EC407A'
-            },
-            'theme-gold': {
-                name: '复古金',
-                primary: '#C9A227',
-                primaryLight: 'rgba(201, 162, 39, .9)',
-                primaryDark: 'rgba(201, 162, 39, 1)',
-                bg: '#FAF7F0',
-                text: '#3E2723',
-                textLight: '#8B7355',
-                separator: '#B89A60',
-                loveColor: '#B8860B'
-            }
-        },
+        currentTemplate: 'classic', // 当前模板：classic(经典) | mayday(五迷)
 
         // 以上变量都不用动，以下变量是需要修改的
 
@@ -74,10 +15,10 @@ App({
         // const target = new Date('2023-11-08 08:00:00');
         // const isOver = Date.now() >= target.getTime();
         // console.log(isOver);
-        magic: Date.now() >= new Date('2026-09-22 19:00:00').getTime(),
+        magic: Date.now() >= new Date('2026-10-08 19:30:00').getTime(),
 
         // 婚礼日期时间
-        weddingTime: '2026-11-18 17:00:00',
+        weddingTime: '2026-11-19 12:00:00',
 
         // 新郎新娘信息
         couple: [{
@@ -87,7 +28,7 @@ App({
             number: '13670401092', // 手机号码
             birthday: '1995.08.21' // 出生日期
         }, {
-            image: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife-info.jpg', // 新娘单人照
+            image: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife.jpg', // 新娘单人照
             name: '何洁琼', // 姓名
             alias: '新娘', // 称谓
             number: '13169642658', // 手机号码
@@ -101,33 +42,22 @@ App({
         anniversary: '2024.01.07'
     },
 
-    // 小程序启动时，初始化云开发环境和主题
+    // 小程序启动时，初始化云开发环境
     onLaunch() {
         !this.globalData.isRemoved && wx.cloud.init({
             env: 'xxxxxxx', // 云开发环境ID，在云开发控制台里可以查看
             traceUser: true
         })
-        
-        // 从本地存储加载主题设置
-        const savedTheme = wx.getStorageSync('currentTheme')
-        if (savedTheme && this.globalData.themes[savedTheme]) {
-            this.globalData.currentTheme = savedTheme
-        }
+
+        // 从本地存储加载模板设置
+        const savedTpl = wx.getStorageSync('currentTemplate')
+        if (savedTpl) this.globalData.currentTemplate = savedTpl
     },
-    
-    // 切换主题的全局方法
-    setTheme(themeKey) {
-        if (this.globalData.themes[themeKey]) {
-            this.globalData.currentTheme = themeKey
-            wx.setStorageSync('currentTheme', themeKey)
-            return true
-        }
-        return false
-    },
-    
-    // 获取当前主题配置
-    getCurrentTheme() {
-        return this.globalData.themes[this.globalData.currentTheme]
+
+    // 切换模板
+    setTemplate(tpl) {
+        this.globalData.currentTemplate = tpl
+        wx.setStorageSync('currentTemplate', tpl)
     },
 
     // 小程序可见时，判断是否为单页模式

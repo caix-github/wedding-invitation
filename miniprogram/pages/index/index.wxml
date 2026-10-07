@@ -1,27 +1,34 @@
-<!-- 主题容器 -->
-<view class="theme-wrap {{ currentTheme }}">
-
-<!-- 主题切换面板 -->
-<view class="theme-panel">
-    <view class="theme-toggle-btn" bindtap="toggleThemePanel">
-        <text class="theme-toggle-icon">🎨</text>
-    </view>
-    <view wx:if="{{ showThemePanel }}" class="theme-dropdown" catchtap="">
-        <view class="theme-dropdown-title">选择主题风格</view>
-        <view 
-            wx:for="{{ themeList }}" 
-            wx:key="key" 
-            class="theme-option {{ item.key === currentTheme ? 'active' : '' }}"
-            data-theme="{{ item.key }}"
-            bindtap="selectTheme"
-        >
-            <view class="theme-color-dot" style="background-color: {{ item.primary }};"></view>
-            <view class="theme-option-name">{{ item.name }}</view>
-            <view wx:if="{{ item.key === currentTheme }}" class="theme-check">✓</view>
-        </view>
+<!-- 模板切换按钮 -->
+<view class="tpl-switch" bindtap="switchTemplate">
+    <view class="tpl-switch-inner">
+        <text class="tpl-switch-icon">{{ currentTemplate === 'classic' ? '🎵' : '囍' }}</text>
+        <text class="tpl-switch-text">{{ currentTemplate === 'classic' ? '五迷模式' : '经典模式' }}</text>
     </view>
 </view>
 
+<!-- 音乐播放器（经典+五迷共用）悬浮图标+展开面板 -->
+<view wx:if="{{ magic }}" class="music-float {{ musicExpanded ? 'expanded' : '' }} {{ musicClosed ? 'closed' : '' }}">
+    <!-- 收起状态：小圆点 -->
+    <view wx:if="{{ musicClosed }}" class="music-float-mini" bindtap="reopenMusic">
+        <text class="music-float-mini-icon">🎵</text>
+    </view>
+    <!-- 正常状态：图标+面板 -->
+    <block wx:else>
+        <view class="music-float-icon {{ musicIsPaused ? 'paused' : '' }}" bindtap="toggleMusicPanel">
+            <image src="../../images/icon/music.png" mode="aspectFit" />
+        </view>
+        <view class="music-float-panel" wx:if="{{ musicExpanded }}">
+            <view class="music-float-info" bindtap="toggleMusic">
+                <view class="music-float-name">{{ music.name }}</view>
+                <view class="music-float-singer">{{ music.singer }} · {{ musicIsPaused ? '已暂停' : '播放中' }}</view>
+            </view>
+            <view class="music-float-close" bindtap="closeMusic">×</view>
+        </view>
+    </block>
+</view>
+
+<!-- ==================== 经典模板 ==================== -->
+<block wx:if="{{ currentTemplate === 'classic' }}">
 <view class="title">
     <view>好久不见，婚礼见丨{{ couple[0].name }}&{{ couple[1].name }}</view>
     <view>我们结婚啦~</view>
@@ -36,23 +43,9 @@
     <image class="img-cover-word" src="https://h5cdn.hunbei.com/editorCustomPic/2023-5-5-XpF8Q3dtRTsbfzTY8WwBwFWpDhiGPe5k?imageMogr2/auto-orient/thumbnail/747x693>" mode="aspectFit" />
     <view class="cover">
         <image class="img-invitation" src="https://h5cdn.hunbei.com/editorCustomPic/2022-11-4-N87SPKmaSQW7kZ3i7ZH4QHeMXpYhZzDs.png?imageMogr2/auto-orient/crop/!1455x384a457a363/quality/90|imageMogr2/thumbnail/659x174>" mode="aspectFit" />
-        <image class="img-cover" src="{{ imgs.cover }}" mode="aspectFit" />
+        <image class="img-cover" src="{{ imgs.cover1 }}" mode="aspectFit" />
     </view>
     <view class="lh15">斯人若如虹，遇上方知有</view>
-</view>
-
-<view wx:if="{{ magic }}" class="music">
-    <view class="music-controls {{ musicIsPaused ? 'paused' : '' }}" bindtap="toggleMusic">
-        <image src="../../images/icon/music.png" mode="aspectFit" />
-    </view>
-    <view class="music-left">
-        <view class="music-title">{{ music.name }} - {{ music.singer }}</view>
-        <view class="music-desc">已为您播放了歌曲</view>
-    </view>
-    <view class="music-right">
-        <image class="music-status" src="https://h5cdn.hunbei.com/editorCustomPic/2022-5-25-dcdPDnJmTyZs5FbjdeWdXShEEYRkN6A4.gif?imageMogr2/auto-orient/thumbnail/48x34>" mode="aspectFit" />
-        <image class="music-poster" src="{{ imgs.poster }}" mode="aspectFit" />
-    </view>
 </view>
 
 <view class="tc lh21 mb58">
@@ -66,20 +59,6 @@
     <view class="mb58">是不计得失的支持</view>
     <view>好久不见，婚礼见</view>
     <view>❤</view>
-</view>
-
-<view class="tc lh21 mb100">
-    <image class="img-introduce" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-22-WNhBXi3ty4fw7dwFBxSZneDKYtz754ya.png?imageMogr2/auto-orient/thumbnail/542.00x58.84>" mode="aspectFit" />
-    <view class="moon">
-        <image class="img-moon" src="https://h5cdn.hunbei.com/editorCustomPic/2022-2-16-6xEP56tzDiPX53f4WZbAYR3pmwAZB7M7.png?imageMogr2/auto-orient/thumbnail/310.00x465.00>" mode="aspectFit" />
-        <image class="img-moon" src="https://h5cdn.hunbei.com/editorCustomPic/2022-2-16-TaHn8RGyJTdcwF5HGPkxrrifeFPNmPek.png?imageMogr2/auto-orient/thumbnail/310.00x464.11>" mode="aspectFit" />
-        <view class="birthday">
-            <text wx:for="{{ couple }}" wx:key="name">{{ item.birthday }}</text>
-        </view>
-    </view>
-    <view>出生时的月亮</view>
-    <view>Random luck in universe</view>
-    <view>宇宙间相遇的浪漫</view>
 </view>
 
 <view class="husband lh21 mb100">
@@ -135,7 +114,7 @@
 
 <view class="leaf lh21 mb152">
     <view class="img-row mb28">
-        <image class="img-leaf-left" src="{{ imgs.leftUp }}" mode="aspectFit" />
+        <image class="img-leaf-left" src="{{ imgs.leftUp1 }}" mode="aspectFit" />
         <image class="img-leaf" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-2-k8yzidKa4XYnCZdMDQWfGmaxzXreeAeP.png?imageMogr2/auto-orient/thumbnail/624x493>/format/webp" mode="aspectFit" />
     </view>
     <view class="img-row tc pr40">
@@ -151,13 +130,14 @@
 <view class="tc lh21 mb152">
     <view class="img-map mb100">
         <view class="img-map-row">
-            <image class="img-map-item" src="{{ imgs.map[0] }}" mode="aspectFit" />
-            <image class="img-map-item" src="{{ imgs.map[1] }}" mode="aspectFit" />
+            <image class="img-map-item" src="{{ imgs.map[0] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ imgs.map[1] }}" mode="aspectFill" />
         </view>
         <view class="img-map-row">
-            <image class="img-map-item" src="{{ imgs.map[2] }}" mode="aspectFit" />
-            <image class="img-map-item" src="{{ imgs.map[3] }}" mode="aspectFit" />
+            <image class="img-map-item" src="{{ imgs.map[2] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ imgs.map[3] }}" mode="aspectFill" />
         </view>
+        <view class="img-map-center">❤</view>
     </view>
     <view>不管外面的世界风雨飘摇也罢</view>
     <view>希望我们总能以最简单的方式相伴</view>
@@ -271,7 +251,222 @@
     <image class="img-end" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-19-niYXMwfBrA5bCeRQSFnXRRKRmcSnmfEC.png?imageMogr2/auto-orient/thumbnail/519x264>/format/webp" mode="aspectFit" />
 </view>
 
-<!-- 祝福语轮播以及底部快捷跳转 -->
+</block><!-- /经典模板 -->
+
+<!-- ==================== 五迷模板 ==================== -->
+<block wx:if="{{ currentTemplate === 'mayday' }}">
+
+<!-- 封面 hero -->
+<view class="md-hero">
+    <image class="md-hero-img" src="{{ maydayImgs.announcement }}" mode="aspectFit" />
+    <view class="md-hero-deco">♡</view>
+    <view class="md-hero-title">We're married!</view>
+    <view class="md-hero-names">{{ couple[0].name }} & {{ couple[1].name }}</view>
+    <view class="md-hero-date">{{ weddingTimeStr[0] }}</view>
+    <!-- <view class="md-hero-deco">♡</view> -->
+</view>
+
+<!-- 新郎新娘独照 -->
+<view class="md-couple-photos">
+    <view class="md-couple-photo-item">
+        <view class="md-solo-ring">
+            <image class="md-solo-photo" src="{{ imgs.husband }}" mode="aspectFill" />
+        </view>
+        <view class="md-solo-name">{{ couple[0].name }}</view>
+        <view class="md-solo-role">新郎</view>
+    </view>
+    <view class="md-couple-heart">♡</view>
+    <view class="md-couple-photo-item">
+        <view class="md-solo-ring">
+            <image class="md-solo-photo" src="{{ imgs.wife }}" mode="aspectFill" />
+        </view>
+        <view class="md-solo-name">{{ couple[1].name }}</view>
+        <view class="md-solo-role">新娘</view>
+    </view>
+</view>
+
+<!-- 卜卜吉祥物 + 标语 -->
+<!-- <view class="md-mascot-block">
+    <image class="md-mascot" src="{{ maydayImgs.mascot }}" mode="aspectFit" />
+    <view class="md-slogan">May I LOVE U</view>
+    <view class="md-slogan-sub">—— 五月天</view>
+</view> -->
+
+<!-- 章节1：最重要的小事 -->
+<view class="md-chapter">
+    <view class="md-chapter-num">01</view>
+    <view class="md-chapter-title">最重要的小事</view>
+    <view class="md-lyrics-block">
+        <view class="md-lyric">你问我全世界是哪里最美</view>
+        <view class="md-lyric md-accent">答案是你身边</view>
+        <view class="md-lyric-sub">最重要的小事，是你</view>
+    </view>
+    <image class="md-img-wide" src="{{ maydayImgs.peachBride }}" mode="widthFix" />
+</view>
+
+<!-- 章节2：我不愿让你一个人 -->
+<view class="md-chapter md-chapter-alt">
+    <view class="md-chapter-num">02</view>
+    <view class="md-chapter-title">我不愿让你一个人</view>
+    <view class="md-lyrics-block">
+        <view class="md-lyric">我不愿让你一个人</view>
+        <view class="md-lyric">一个人在人海浮沉</view>
+        <view class="md-lyric md-accent">从今天起，换我来照顾你</view>
+    </view>
+    <image class="md-img-full" src="{{ maydayImgs.scene }}" mode="widthFix" />
+</view>
+
+<!-- 婚纱照轮播 -->
+<view class="md-photo-swiper">
+    <swiper class="md-swiper" autoplay circular interval="3000" easing-function="easeInOut" indicator-dots indicator-color="rgba(229,57,53,.2)" indicator-active-color="#E53935">
+        <swiper-item wx:for="{{ imgs.swiperWmls1 }}" wx:key="*this">
+            <image class="md-swiper-img" src="{{ item }}" mode="aspectFill" />
+        </swiper-item>
+    </swiper>
+    <view class="md-swiper-caption">每一次相遇都是奇迹</view>
+</view>
+
+<!-- 章节3：恋爱ing -->
+<view class="md-chapter md-chapter-pink">
+    <view class="md-chapter-num">03</view>
+    <view class="md-chapter-title">恋爱ing</view>
+    <view class="md-lyrics-block">
+        <view class="md-lyric md-large">恋爱ing  happy ing</view>
+        <view class="md-lyric">心情就像是坐上一台喷射机</view>
+        <view class="md-lyric">世界变的好近</view>
+    </view>
+    <image class="md-img-couple" src="{{ maydayImgs.couple }}" mode="aspectFit" />
+</view>
+
+<!-- 章节4：突然好想你 -->
+<view class="md-chapter">
+    <view class="md-chapter-num">04</view>
+    <view class="md-chapter-title">突然好想你</view>
+    <view class="md-lyrics-block">
+        <view class="md-lyric">突然好想你</view>
+        <view class="md-lyric">你会在哪里</view>
+        <view class="md-lyric">过的快乐或委屈</view>
+    </view>
+    <image class="md-img-full" src="{{ maydayImgs.cats }}" mode="widthFix" />
+</view>
+
+<!-- 章节5：知足 -->
+<view class="md-chapter md-chapter-green">
+    <view class="md-chapter-num">05</view>
+    <view class="md-chapter-title">知足</view>
+    <view class="md-lyrics-block">
+        <view class="md-lyric">如果我们不在一起</view>
+        <view class="md-lyric">那我也一样爱你</view>
+        <view class="md-lyric md-accent">手牵手一步两步三步四步望着天</view>
+    </view>
+    <image class="md-img-full" src="{{ maydayImgs.network }}" mode="widthFix" />
+</view>
+
+<!-- 婚纱四宫格 -->
+<view class="md-photo-grid">
+    <view class="md-grid-row">
+        <image class="md-grid-item" src="{{ imgs.map[0] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ imgs.map[1] }}" mode="aspectFill" />
+    </view>
+    <view class="md-grid-row">
+        <image class="md-grid-item" src="{{ imgs.map[2] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ imgs.map[3] }}" mode="aspectFill" />
+    </view>
+    <view class="md-grid-center">❤</view>
+</view>
+
+<!-- CHEERS 角色集合 -->
+<view class="md-cheers-block">
+    <image class="md-img-full" src="{{ maydayImgs.characters }}" mode="widthFix" />
+    <view class="md-cheers-text">CHEERS! May I LOVE U</view>
+</view>
+
+<!-- 婚纱长图 -->
+<view class="md-series-photos">
+    <image class="md-img-full" wx:for="{{ imgs.serieswmls }}" wx:key="*this" src="{{ item }}" mode="widthFix" />
+</view>
+
+<!-- SAVE THE DATE -->
+<view class="md-save-date">
+    <view class="md-save-date-title">SAVE THE DATE</view>
+    <view class="md-save-date-deco"></view>
+    <image class="md-calendar-art" src="{{ maydayImgs.calendarArt }}" mode="widthFix" />
+    <calendar id="calendar" date="{{ weddingTime }}"></calendar>
+    <view class="md-save-date-main">{{ weddingTimeStr[2] }}</view>
+    <view class="md-save-date-sub">{{ weddingTimeStr[3] }}</view>
+</view>
+
+<!-- 邀请函正文 -->
+<view class="md-invite-card">
+    <view class="md-invite-header">WEDDING INVITATION</view>
+    <view class="md-invite-deco-line"></view>
+    <view class="md-invite-body">
+        <view class="md-invite-names">{{ couple[0].name }} & {{ couple[1].name }}</view>
+        <view class="md-invite-text">携同我们的父母</view>
+        <view class="md-invite-text">邀请您出席我们的婚礼仪式</view>
+        <view class="md-invite-text md-accent">见证和分享我们的幸福时刻</view>
+    </view>
+    <view class="md-invite-deco-line"></view>
+    <image class="md-invite-logo" src="{{ maydayImgs.petLogo }}" mode="aspectFit" />
+</view>
+
+<!-- 酒店定位 -->
+<view class="location mb100">
+    <view>
+        <view>{{ location.name }}</view>
+        <view>{{ location.address }}</view>
+    </view>
+    <map longitude="{{ location.longitude }}" latitude="{{ location.latitude }}" enable-zoom="{{ false }}" enable-scroll="{{ false }}" markers="{{ location.markers }}" />
+    <view class="location-mask" bindtap="openLocation"></view>
+</view>
+
+<!-- 联系新人 -->
+<view class="phone mb100">
+    <view class="phone-item" wx:for="{{ couple }}" wx:key="name">
+        <image class="couple-cover" src="{{ item.image }}" mode="aspectFit" />
+        <button bindtap="call" data-phone="{{ item.number }}"><image src="../../images/icon/phone.png" mode="aspectFit" />联系{{ item.alias }}</button>
+    </view>
+</view>
+
+<!-- 表单 -->
+<form wx:if="{{ magic }}" bindsubmit="submit">
+    <view class="form tc mb100">
+        <view>
+            <text>*</text>
+            <input type="text" placeholder="姓名" name="name" value="{{ form.name }}" placeholder-class="form-input-placeholder" maxlength="10" />
+        </view>
+        <view>
+            <text>*</text>
+            <input type="number" placeholder="出席人数" name="num" value="{{ form.num }}" placeholder-class="form-input-placeholder" maxlength="2" />
+        </view>
+        <view>
+            <textarea type="text" placeholder="祝福语，可以上墙哦~" name="greeting" value="{{ form.greeting }}" placeholder-class="form-input-placeholder" maxlength="140" disable-default-padding />
+        </view>
+        <button form-type="submit" open-type="getUserInfo">{{ form.name ? '更新' : '提交' }}</button>
+    </view>
+</form>
+
+<!-- 温馨提示 -->
+<view class="md-tips-card">
+    <image class="md-tips-img" src="{{ maydayImgs.extra6 || maydayImgs.mascot }}" mode="aspectFit" />
+    <view class="md-tips-label">温馨 Tips</view>
+    <view class="md-lyric-sub">请预留好{{ weddingTimeStr[4] }}这一天的行程</view>
+    <view class="md-lyric-sub">如果被事务牵绊或临时有变化</view>
+    <view class="md-lyric-sub">请提前告知新郎/新娘</view>
+</view>
+
+<!-- 结尾 -->
+<view class="md-ending">
+    <view class="md-ending-lyric">因为你</view>
+    <view class="md-ending-lyric">所以我</view>
+    <view class="md-ending-lyric">那是你 牵着我</view>
+    <view class="md-ending-lyric md-accent">你和我用最小回忆堆成宇宙</view>
+    <view class="md-ending-sign">{{ couple[0].name }} & {{ couple[1].name }}</view>
+</view>
+
+</block><!-- /五迷模板 -->
+
+<!-- 祝福语轮播以及底部快捷跳转（共用） -->
 <view wx:if="{{ magic }}" class="greetings">
     <view class="greetings-list">
         <view class="greetings-item {{ activeIdx === index ? 'active' : '' }}" wx:for="{{ greetings }}" wx:key="_id" bind:animationend="onAnimationend"><text class="greetings-name">{{ item.name }}：</text>{{ item.greeting || '新婚快乐' }}</view>
@@ -289,9 +484,7 @@
     </view>
 </view>
 
-<!-- 公告栏入口 -->
+<!-- 公告栏入口（共用） -->
 <view wx:if="{{ isManager }}" class="manager">
     <image bindtap="goInfo" src="../../images/icon/manager.png" mode="widthFix"/>
 </view>
-
-</view><!-- /theme-wrap -->
