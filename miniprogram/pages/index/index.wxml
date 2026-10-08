@@ -29,13 +29,14 @@
 
 <!-- ==================== 经典模板 ==================== -->
 <block wx:if="{{ currentTemplate === 'classic' }}">
+<view class="classic-template">
 <view class="title">
     <view>好久不见，婚礼见丨{{ couple[0].name }}&{{ couple[1].name }}</view>
     <view>我们结婚啦~</view>
 </view>
 
 <view class="desc">
-    <text class="author">{{ publisher }}</text>
+    <text class="author">{{ classicTemplate.publisher }}</text>
     <text class="date">{{ weddingTimeStr[0] }}</text>
 </view>
 
@@ -43,7 +44,7 @@
     <image class="img-cover-word" src="https://h5cdn.hunbei.com/editorCustomPic/2023-5-5-XpF8Q3dtRTsbfzTY8WwBwFWpDhiGPe5k?imageMogr2/auto-orient/thumbnail/747x693>" mode="aspectFit" />
     <view class="cover">
         <image class="img-invitation" src="https://h5cdn.hunbei.com/editorCustomPic/2022-11-4-N87SPKmaSQW7kZ3i7ZH4QHeMXpYhZzDs.png?imageMogr2/auto-orient/crop/!1455x384a457a363/quality/90|imageMogr2/thumbnail/659x174>" mode="aspectFit" />
-        <image class="img-cover" src="{{ imgs.cover1 }}" mode="aspectFit" />
+        <image class="img-cover" src="{{ classicTemplate.images.cover1 }}" mode="aspectFit" />
     </view>
     <view class="lh15">斯人若如虹，遇上方知有</view>
 </view>
@@ -62,7 +63,7 @@
 </view>
 
 <view class="husband lh21 mb100">
-    <image class="img-husband" src="{{ imgs.husband }}" mode="aspectFit" />
+    <image class="img-husband" src="{{ sharedImages.husband }}" mode="aspectFit" />
     <view class="husband-desc">
         <view>/</view>
         <view>他有 最暖的真心</view>
@@ -74,11 +75,11 @@
 <view class="wife lh21 mb100">
     <view class="wife-desc">
         <view>/</view>
-        <view>{{ anniversary }}</view>
+        <view>{{ classicTemplate.anniversary }}</view>
         <view>桃之夭夭</view>
         <view>灼灼其华</view>
     </view>
-    <image class="img-wife" src="{{ imgs.wife }}" mode="aspectFit" />
+    <image class="img-wife" src="{{ sharedImages.wife }}" mode="aspectFit" />
 </view>
 
 <view class="tc lh21 mb100">
@@ -92,7 +93,7 @@
     <image class="img-separate mb100" src="https://h5cdn.hunbei.com/editorCustomPic/2022-1-26-rx4ZZi3KdMErdNk4E2X3EHh3EiB3bPdY.gif?imageMogr2/auto-orient/thumbnail/864x27>" mode="aspectFit" />
     <image class="img-wedding mb58" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-22-HsinmKrKbjrjeSYWDBi7JYMjxrNeeXtj.png?imageMogr2/auto-orient/thumbnail/507x99>/format/webp" mode="aspectFit" />
     <swiper class="swiper-western mb58" autoplay circular interval="2500" easing-function="linear" indicator-dots>
-        <swiper-item wx:for="{{ imgs.swiper1 }}" wx:key="*this">
+        <swiper-item wx:for="{{ classicTemplate.images.swiper1 }}" wx:key="*this">
             <image class="img-full-width" src="{{ item }}" mode="widthFix" />
         </swiper-item>
     </swiper>
@@ -104,7 +105,7 @@
 
 <view class="tc lh21 mb152">
     <view class="img-list mb58">
-        <image wx:for="{{ imgs.series }}" wx:key="*this" class="img-full-width" src="{{ item }}" mode="widthFix" />
+        <image wx:for="{{ classicTemplate.images.series }}" wx:key="*this" class="img-full-width" src="{{ item }}" mode="widthFix" />
     </view>
     <view>人生其实只要两次幸运就好</view>
     <view>一次遇见你，一次是走到底</view>
@@ -114,11 +115,11 @@
 
 <view class="leaf lh21 mb152">
     <view class="img-row mb28">
-        <image class="img-leaf-left" src="{{ imgs.leftUp1 }}" mode="aspectFit" />
+        <image class="img-leaf-left" src="{{ classicTemplate.images.leftUp1 }}" mode="aspectFit" />
         <image class="img-leaf" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-2-k8yzidKa4XYnCZdMDQWfGmaxzXreeAeP.png?imageMogr2/auto-orient/thumbnail/624x493>/format/webp" mode="aspectFit" />
     </view>
     <view class="img-row tc pr40">
-        <image class="img-leaf-left-down" src="{{ imgs.leftDown }}" mode="aspectFit" />
+        <image class="img-leaf-left-down" src="{{ classicTemplate.images.leftDown }}" mode="aspectFit" />
         <view class="text">
             <view class="line"></view>
             <view>始于初见，</view>
@@ -130,12 +131,12 @@
 <view class="tc lh21 mb152">
     <view class="img-map mb100">
         <view class="img-map-row">
-            <image class="img-map-item" src="{{ imgs.map[0] }}" mode="aspectFill" />
-            <image class="img-map-item" src="{{ imgs.map[1] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ sharedImages.map[0] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ sharedImages.map[1] }}" mode="aspectFill" />
         </view>
         <view class="img-map-row">
-            <image class="img-map-item" src="{{ imgs.map[2] }}" mode="aspectFill" />
-            <image class="img-map-item" src="{{ imgs.map[3] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ sharedImages.map[2] }}" mode="aspectFill" />
+            <image class="img-map-item" src="{{ sharedImages.map[3] }}" mode="aspectFill" />
         </view>
         <view class="img-map-center">❤</view>
     </view>
@@ -148,12 +149,12 @@
 
 <view class="tc lh21 mb100">
     <swiper class="swiper-outdoor" autoplay circular interval="2500" easing-function="linear" indicator-dots>
-        <swiper-item wx:for="{{ imgs.swiper2 }}" wx:key="*this">
+        <swiper-item wx:for="{{ classicTemplate.images.swiper2 }}" wx:key="*this">
             <image class="img-full-width" src="{{ item }}" mode="widthFix" />
         </swiper-item>
     </swiper>
     
-    <image class="img-swiper-float" src="{{ imgs.swiper2Static }}" mode="aspectFit" />
+    <image class="img-swiper-float" src="{{ classicTemplate.images.swiper2Static }}" mode="aspectFit" />
     <view>我们将成为彼此紧紧依靠的家人</view>
     <view>银河系浪漫的搭车客</view>
     <view>共同去探索广阔遥远的世界</view>
@@ -172,7 +173,7 @@
 <view class="tc lh21 mb100">
     <view class="love mb100">囍</view>
     <swiper class="swiper-chinese mb100" autoplay circular interval="2500" easing-function="linear" indicator-dots>
-        <swiper-item wx:for="{{ imgs.swiper3 }}" wx:key="*this">
+        <swiper-item wx:for="{{ classicTemplate.images.swiper3 }}" wx:key="*this">
             <image class="img-full-width" src="{{ item }}" mode="widthFix" />
         </swiper-item>
     </swiper>
@@ -199,33 +200,9 @@
     <view class="location-mask" bindtap="openLocation"></view>
 </view>
 
-<view class="phone mb100">
-    <view class="phone-item" wx:for="{{ couple }}" wx:key="name">
-        <image class="couple-cover" src="{{ item.image }}" mode="aspectFit" />
-        <button bindtap="call" data-phone="{{ item.number }}"><image src="../../images/icon/phone.png" mode="aspectFit" />联系{{ item.alias }}</button>
-    </view>
-</view>
-
-<form wx:if="{{ magic }}" bindsubmit="submit">
-    <view class="form tc mb100">
-        <view>
-            <text>*</text>
-            <input type="text" placeholder="姓名" name="name" value="{{ form.name }}" placeholder-class="form-input-placeholder" maxlength="10" />
-        </view>
-        <view>
-            <text>*</text>
-            <input type="number" placeholder="出席人数" name="num" value="{{ form.num }}" placeholder-class="form-input-placeholder" maxlength="2" />
-        </view>
-        <view>
-            <textarea type="text" placeholder="祝福语，可以上墙哦~" name="greeting" value="{{ form.greeting }}" placeholder-class="form-input-placeholder" maxlength="140" disable-default-padding />
-        </view>
-        <button form-type="submit" open-type="getUserInfo">{{ name ? '更新' : '提交' }}</button>
-    </view>
-</form>
-
 <view class="tc lh21 mb100">
     <image class="img-separate mb100" src="https://h5cdn.hunbei.com/editorCustomPic/2022-1-26-rx4ZZi3KdMErdNk4E2X3EHh3EiB3bPdY.gif?imageMogr2/auto-orient/thumbnail/864x27>" mode="aspectFit" />
-    <image class="img-full-width mb100" src="{{ imgs.end1 }}" mode="widthFix" />
+    <image class="img-full-width mb100" src="{{ classicTemplate.images.end1 }}" mode="widthFix" />
     <view class="tl">
         <view class="tips">温馨tips：</view>
         <view>请预留好{{ weddingTimeStr[4] }}这一天的行程</view>
@@ -237,7 +214,7 @@
 </view>
 
 <view class="tc lh21 mb152">
-    <image class="img-full-width mb100" src="{{ imgs.end2 }}" mode="widthFix" />
+    <image class="img-full-width mb100" src="{{ classicTemplate.images.end2 }}" mode="widthFix" />
     <view class="tr mb100">
         <view>我把我的整个灵魂都给你</view>
         <view>连同它的怪癖</view>
@@ -251,6 +228,7 @@
     <image class="img-end" src="https://h5cdn.hunbei.com/editorCustomPic/2022-8-19-niYXMwfBrA5bCeRQSFnXRRKRmcSnmfEC.png?imageMogr2/auto-orient/thumbnail/519x264>/format/webp" mode="aspectFit" />
 </view>
 
+</view>
 </block><!-- /经典模板 -->
 
 <!-- ==================== 五迷模板 ==================== -->
@@ -258,7 +236,7 @@
 
 <!-- 封面 hero -->
 <view class="md-hero">
-    <image class="md-hero-img" src="{{ maydayImgs.announcement }}" mode="aspectFit" />
+    <image class="md-hero-img" src="{{ maydayTemplate.images.announcement }}" mode="aspectFit" />
     <view class="md-hero-deco">♡</view>
     <view class="md-hero-title">We're married!</view>
     <view class="md-hero-names">{{ couple[0].name }} & {{ couple[1].name }}</view>
@@ -270,7 +248,7 @@
 <view class="md-couple-photos">
     <view class="md-couple-photo-item">
         <view class="md-solo-ring">
-            <image class="md-solo-photo" src="{{ imgs.husband }}" mode="aspectFill" />
+            <image class="md-solo-photo" src="{{ sharedImages.husband }}" mode="aspectFill" />
         </view>
         <view class="md-solo-name">{{ couple[0].name }}</view>
         <view class="md-solo-role">新郎</view>
@@ -278,7 +256,7 @@
     <view class="md-couple-heart">♡</view>
     <view class="md-couple-photo-item">
         <view class="md-solo-ring">
-            <image class="md-solo-photo" src="{{ imgs.wife }}" mode="aspectFill" />
+            <image class="md-solo-photo" src="{{ sharedImages.wife }}" mode="aspectFill" />
         </view>
         <view class="md-solo-name">{{ couple[1].name }}</view>
         <view class="md-solo-role">新娘</view>
@@ -287,7 +265,7 @@
 
 <!-- 卜卜吉祥物 + 标语 -->
 <!-- <view class="md-mascot-block">
-    <image class="md-mascot" src="{{ maydayImgs.mascot }}" mode="aspectFit" />
+    <image class="md-mascot" src="{{ maydayTemplate.images.mascot }}" mode="aspectFit" />
     <view class="md-slogan">May I LOVE U</view>
     <view class="md-slogan-sub">—— 五月天</view>
 </view> -->
@@ -301,7 +279,7 @@
         <view class="md-lyric md-accent">答案是你身边</view>
         <view class="md-lyric-sub">最重要的小事，是你</view>
     </view>
-    <image class="md-img-wide" src="{{ maydayImgs.peachBride }}" mode="widthFix" />
+    <image class="md-img-wide" src="{{ maydayTemplate.images.peachBride }}" mode="widthFix" />
 </view>
 
 <!-- 章节2：我不愿让你一个人 -->
@@ -313,13 +291,13 @@
         <view class="md-lyric">一个人在人海浮沉</view>
         <view class="md-lyric md-accent">从今天起，换我来照顾你</view>
     </view>
-    <image class="md-img-full" src="{{ maydayImgs.scene }}" mode="widthFix" />
+    <image class="md-img-full" src="{{ maydayTemplate.images.scene }}" mode="widthFix" />
 </view>
 
 <!-- 婚纱照轮播 -->
 <view class="md-photo-swiper">
     <swiper class="md-swiper" autoplay circular interval="3000" easing-function="easeInOut" indicator-dots indicator-color="rgba(229,57,53,.2)" indicator-active-color="#E53935">
-        <swiper-item wx:for="{{ imgs.swiperWmls1 }}" wx:key="*this">
+        <swiper-item wx:for="{{ maydayTemplate.images.swiper }}" wx:key="*this">
             <image class="md-swiper-img" src="{{ item }}" mode="aspectFill" />
         </swiper-item>
     </swiper>
@@ -335,7 +313,7 @@
         <view class="md-lyric">心情就像是坐上一台喷射机</view>
         <view class="md-lyric">世界变的好近</view>
     </view>
-    <image class="md-img-couple" src="{{ maydayImgs.couple }}" mode="aspectFit" />
+    <image class="md-img-couple" src="{{ maydayTemplate.images.couple }}" mode="aspectFit" />
 </view>
 
 <!-- 章节4：突然好想你 -->
@@ -347,7 +325,7 @@
         <view class="md-lyric">你会在哪里</view>
         <view class="md-lyric">过的快乐或委屈</view>
     </view>
-    <image class="md-img-full" src="{{ maydayImgs.cats }}" mode="widthFix" />
+    <image class="md-img-full" src="{{ maydayTemplate.images.cats }}" mode="widthFix" />
 </view>
 
 <!-- 章节5：知足 -->
@@ -359,41 +337,39 @@
         <view class="md-lyric">那我也一样爱你</view>
         <view class="md-lyric md-accent">手牵手一步两步三步四步望着天</view>
     </view>
-    <image class="md-img-full" src="{{ maydayImgs.network }}" mode="widthFix" />
+    <image class="md-img-full" src="{{ maydayTemplate.images.network }}" mode="widthFix" />
 </view>
 
 <!-- 婚纱四宫格 -->
 <view class="md-photo-grid">
     <view class="md-grid-row">
-        <image class="md-grid-item" src="{{ imgs.map[0] }}" mode="aspectFill" />
-        <image class="md-grid-item" src="{{ imgs.map[1] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ sharedImages.map[0] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ sharedImages.map[1] }}" mode="aspectFill" />
     </view>
     <view class="md-grid-row">
-        <image class="md-grid-item" src="{{ imgs.map[2] }}" mode="aspectFill" />
-        <image class="md-grid-item" src="{{ imgs.map[3] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ sharedImages.map[2] }}" mode="aspectFill" />
+        <image class="md-grid-item" src="{{ sharedImages.map[3] }}" mode="aspectFill" />
     </view>
     <view class="md-grid-center">❤</view>
 </view>
 
 <!-- CHEERS 角色集合 -->
 <view class="md-cheers-block">
-    <image class="md-img-full" src="{{ maydayImgs.characters }}" mode="widthFix" />
+    <image class="md-img-full" src="{{ maydayTemplate.images.characters }}" mode="widthFix" />
     <view class="md-cheers-text">CHEERS! May I LOVE U</view>
 </view>
 
 <!-- 婚纱长图 -->
 <view class="md-series-photos">
-    <image class="md-img-full" wx:for="{{ imgs.serieswmls }}" wx:key="*this" src="{{ item }}" mode="widthFix" />
+    <image class="md-img-full" wx:for="{{ maydayTemplate.images.series }}" wx:key="*this" src="{{ item }}" mode="widthFix" />
 </view>
 
 <!-- SAVE THE DATE -->
 <view class="md-save-date">
     <view class="md-save-date-title">SAVE THE DATE</view>
     <view class="md-save-date-deco"></view>
-    <image class="md-calendar-art" src="{{ maydayImgs.calendarArt }}" mode="widthFix" />
+    <!-- <image class="md-calendar-art" src="{{ maydayTemplate.images.calendarArt }}" mode="widthFix" /> -->
     <calendar id="calendar" date="{{ weddingTime }}"></calendar>
-    <view class="md-save-date-main">{{ weddingTimeStr[2] }}</view>
-    <view class="md-save-date-sub">{{ weddingTimeStr[3] }}</view>
 </view>
 
 <!-- 邀请函正文 -->
@@ -407,7 +383,7 @@
         <view class="md-invite-text md-accent">见证和分享我们的幸福时刻</view>
     </view>
     <view class="md-invite-deco-line"></view>
-    <image class="md-invite-logo" src="{{ maydayImgs.petLogo }}" mode="aspectFit" />
+    <image class="md-invite-logo" src="{{ maydayTemplate.images.petLogo }}" mode="aspectFit" />
 </view>
 
 <!-- 酒店定位 -->
@@ -420,35 +396,9 @@
     <view class="location-mask" bindtap="openLocation"></view>
 </view>
 
-<!-- 联系新人 -->
-<view class="phone mb100">
-    <view class="phone-item" wx:for="{{ couple }}" wx:key="name">
-        <image class="couple-cover" src="{{ item.image }}" mode="aspectFit" />
-        <button bindtap="call" data-phone="{{ item.number }}"><image src="../../images/icon/phone.png" mode="aspectFit" />联系{{ item.alias }}</button>
-    </view>
-</view>
-
-<!-- 表单 -->
-<form wx:if="{{ magic }}" bindsubmit="submit">
-    <view class="form tc mb100">
-        <view>
-            <text>*</text>
-            <input type="text" placeholder="姓名" name="name" value="{{ form.name }}" placeholder-class="form-input-placeholder" maxlength="10" />
-        </view>
-        <view>
-            <text>*</text>
-            <input type="number" placeholder="出席人数" name="num" value="{{ form.num }}" placeholder-class="form-input-placeholder" maxlength="2" />
-        </view>
-        <view>
-            <textarea type="text" placeholder="祝福语，可以上墙哦~" name="greeting" value="{{ form.greeting }}" placeholder-class="form-input-placeholder" maxlength="140" disable-default-padding />
-        </view>
-        <button form-type="submit" open-type="getUserInfo">{{ form.name ? '更新' : '提交' }}</button>
-    </view>
-</form>
-
 <!-- 温馨提示 -->
 <view class="md-tips-card">
-    <image class="md-tips-img" src="{{ maydayImgs.extra6 || maydayImgs.mascot }}" mode="aspectFit" />
+    <image class="md-tips-img" src="{{ maydayTemplate.images.mascot }}" mode="aspectFit" />
     <view class="md-tips-label">温馨 Tips</view>
     <view class="md-lyric-sub">请预留好{{ weddingTimeStr[4] }}这一天的行程</view>
     <view class="md-lyric-sub">如果被事务牵绊或临时有变化</view>
@@ -466,10 +416,37 @@
 
 </block><!-- /五迷模板 -->
 
+<!-- 联系新人及表单（两个模板共用） -->
+<view class="shared-contact-form">
+    <view class="phone mb100">
+        <view class="phone-item" wx:for="{{ couple }}" wx:key="name">
+            <image class="couple-cover" src="{{ item.image }}" mode="aspectFit" />
+            <button bindtap="call" data-phone="{{ item.number }}"><image src="../../images/icon/phone.png" mode="aspectFit" />联系{{ item.alias }}</button>
+        </view>
+    </view>
+
+    <form wx:if="{{ magic }}" bindsubmit="submit">
+        <view class="form tc mb100">
+            <view>
+                <text>*</text>
+                <input type="text" placeholder="姓名" name="name" value="{{ form.name }}" placeholder-class="form-input-placeholder" maxlength="10" />
+            </view>
+            <view>
+                <text>*</text>
+                <input type="number" placeholder="出席人数" name="num" value="{{ form.num }}" placeholder-class="form-input-placeholder" maxlength="2" />
+            </view>
+            <view>
+                <textarea type="text" placeholder="祝福语，可以上墙哦~" name="greeting" value="{{ form.greeting }}" placeholder-class="form-input-placeholder" maxlength="140" disable-default-padding />
+            </view>
+            <button form-type="submit" open-type="getUserInfo">{{ form.name ? '更新' : '提交' }}</button>
+        </view>
+    </form>
+</view>
+
 <!-- 祝福语轮播以及底部快捷跳转（共用） -->
 <view wx:if="{{ magic }}" class="greetings">
     <view class="greetings-list">
-        <view class="greetings-item {{ activeIdx === index ? 'active' : '' }}" wx:for="{{ greetings }}" wx:key="_id" bind:animationend="onAnimationend"><text class="greetings-name">{{ item.name }}：</text>{{ item.greeting || '新婚快乐' }}</view>
+        <view class="greetings-item {{ activeIdx === index && greetings.length > 1 ? 'active' : '' }} {{ greetings.length === 1 ? 'single' : '' }}" wx:for="{{ greetings }}" wx:key="_id"><text class="greetings-name">{{ item.name }}：</text>{{ item.greeting || '新婚快乐' }}</view>
     </view>
     <view class="controller">
         <view class="controller-btn">

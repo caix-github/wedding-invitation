@@ -36,11 +36,11 @@
 </view>
 
 <view class="part">
-    <view class="part-title">PDF资料</view>
+    <view class="part-title">公告资料</view>
     <view class="part-main">
         <view class="file" wx:for="{{ files }}" wx:key="fileId" bindtap="openFile" data-index="{{ index }}">
             <text>{{ item.name }}</text>
-            <image src="../../images/icon/pdf.png" mode="aspectFit" />
+            <image src="../../images/icon/file.png" mode="aspectFit" />
         </view>
     </view>
 </view>

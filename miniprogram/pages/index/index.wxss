@@ -401,8 +401,8 @@
     border-radius: 20rpx;
     box-shadow: rgb(153, 153, 153) 0 0 10rpx;
     padding: 20rpx;
-    margin-left: 40rpx;
-    margin-right: 40rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
     line-height: 1.5;
     font-size: 24rpx;
     position: relative;
@@ -545,6 +545,53 @@
     height: 176rpx;
 }
 
+.classic-template {
+    padding: 0;
+}
+
+.classic-template > view {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+
+.classic-template > form {
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.classic-template > form > .form {
+    padding: 0;
+}
+
+.classic-template .husband,
+.classic-template .wife {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.classic-template .img-husband,
+.classic-template .img-wife,
+.classic-template .husband-desc,
+.classic-template .wife-desc {
+    width: 50%;
+}
+
+.classic-template .husband-desc,
+.classic-template .wife-desc {
+    padding: 0 12rpx 24rpx;
+    box-sizing: border-box;
+}
+
+.shared-contact-form {
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.shared-contact-form .form {
+    padding: 0;
+}
+
 .egg {
     line-height: 1.6;
     color: rgb(134, 134, 134);
@@ -620,6 +667,11 @@
 .greetings-item.active {
     -webkit-animation: fadeInOutLeft 5s linear;
     animation: fadeInOutLeft 5s linear;
+}
+
+.greetings-item.single {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .greetings-name {
@@ -708,7 +760,7 @@
 /* 封面 Hero */
 .md-hero {
     text-align: center;
-    padding: 60rpx 40rpx 60rpx;
+    padding: 60rpx 20rpx;
     background: linear-gradient(180deg, #FFEBEE 0%, #FFF5F5 60%, #FFF 100%);
 }
 
@@ -751,7 +803,7 @@
 /* 卜卜吉祥物 */
 .md-mascot-block {
     text-align: center;
-    padding: 60rpx 40rpx;
+    padding: 60rpx 20rpx;
 }
 
 .md-mascot {
@@ -778,7 +830,7 @@
 
 /* 章节通用 */
 .md-chapter {
-    padding: 60rpx 40rpx;
+    padding: 60rpx 20rpx;
     text-align: center;
     position: relative;
 }
@@ -790,13 +842,13 @@
 .md-chapter-pink {
     background: linear-gradient(180deg, #FFF0F5 0%, #FFE4EC 100%);
     border-radius: 24rpx;
-    margin: 0 40rpx;
+    margin: 0 20rpx;
 }
 
 .md-chapter-green {
     background: linear-gradient(180deg, #F0FFF4 0%, #E8F5E9 100%);
     border-radius: 24rpx;
-    margin: 0 40rpx;
+    margin: 0 20rpx;
 }
 
 .md-chapter-num {
@@ -879,7 +931,7 @@
 /* CHEERS 区 */
 .md-cheers-block {
     text-align: center;
-    padding: 60rpx 40rpx;
+    padding: 60rpx 20rpx;
 }
 
 .md-cheers-text {
@@ -892,7 +944,7 @@
 
 /* 婚纱照轮播 */
 .md-photo-swiper {
-    padding: 0 40rpx 80rpx;
+    padding: 0 20rpx 80rpx;
     background: transparent;
 }
 
@@ -924,7 +976,7 @@
     flex-direction: column;
     gap: 16rpx;
     position: relative;
-    margin: 20rpx 40rpx;
+    margin: 20rpx;
     padding: 0;
     background: transparent;
 }
@@ -962,8 +1014,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60rpx;
-    padding: 40rpx;
+    gap: 20rpx;
+    padding: 40rpx 20rpx;
 }
 
 .md-couple-photo-item {
@@ -1010,12 +1062,12 @@
 
 /* 婚纱长图 */
 .md-series-photos {
-    padding: 0 40rpx 80rpx;
+    padding: 0 20rpx 80rpx;
 }
 
 .md-series-photos .md-img-full {
-    margin: 24rpx 0;
-    border-radius: 20rpx 20rpx 8rpx 8rpx;
+    margin: 10rpx 0;
+    /* border-radius: 20rpx 20rpx 8rpx 8rpx; */
 }
 
 /* 日历艺术图 */
@@ -1042,7 +1094,7 @@
 /* SAVE THE DATE */
 .md-save-date {
     text-align: center;
-    padding: 80rpx 40rpx;
+    padding: 80rpx 20rpx;
     background: #FFF8F8;
 }
 
@@ -1062,23 +1114,10 @@
     border-radius: 3rpx;
 }
 
-.md-save-date-main {
-    font-size: 36rpx;
-    font-weight: 600;
-    color: #333;
-    margin-top: 20rpx;
-}
-
-.md-save-date-sub {
-    font-size: 26rpx;
-    color: #888;
-    margin-top: 8rpx;
-}
-
 /* 邀请函卡片 */
 .md-invite-card {
-    margin: 60rpx 40rpx;
-    padding: 60rpx 40rpx;
+    margin: 60rpx 20rpx;
+    padding: 60rpx 20rpx;
     background: linear-gradient(180deg, #FFFDE7 0%, #FFF8E1 100%);
     border-radius: 24rpx;
     text-align: center;
@@ -1132,8 +1171,8 @@
 
 /* 温馨提示 */
 .md-tips-card {
-    margin: 60rpx 40rpx;
-    padding: 48rpx 40rpx;
+    margin: 60rpx 20rpx;
+    padding: 48rpx 20rpx;
     background: #FAFAFA;
     border-radius: 24rpx;
     text-align: center;
@@ -1151,7 +1190,7 @@
 /* 结尾 */
 .md-ending {
     text-align: center;
-    padding: 80rpx 40rpx 120rpx;
+    padding: 80rpx 20rpx 120rpx;
     background: linear-gradient(180deg, #FFF5F5 0%, #FFEBEE 100%);
     border-radius: 24rpx;
     margin: 0 20rpx;

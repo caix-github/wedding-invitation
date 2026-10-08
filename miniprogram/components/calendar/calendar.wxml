@@ -2,6 +2,7 @@
     <view class="calendar-year">{{ year }}</view>
     <view class="calendar-main">
         <view class="calendar-month-day">{{ month }} <text class="calendar-month-day-sep">/</text> {{ day }}</view>
+        <view class="calendar-wedding-time" wx:if="{{ weddingClock }}">婚礼时间 {{ weddingClock }}</view>
         <view class="calendar-line calendar-week">
             <text class="calendar-item">日</text>
             <text class="calendar-item">一</text>
@@ -19,6 +20,27 @@
                 </block>
                 <text wx:else>{{ item }}</text>
             </text>
+        </view>
+    </view>
+    <view class="calendar-countdown-title">距离婚礼还有</view>
+    <view class="calendar-countdown">
+        <view class="calendar-countdown-group" wx:for="{{ countdownUnits }}" wx:key="label" wx:for-item="unit" wx:for-index="unitIndex">
+            <view class="calendar-countdown-digit" wx:for="{{ unit.digits }}" wx:key="key" wx:for-item="digit">
+                <view class="calendar-countdown-half calendar-countdown-static-top">
+                    <view class="calendar-countdown-value">{{ digit.value }}</view>
+                </view>
+                <view class="calendar-countdown-half calendar-countdown-static-bottom">
+                    <view class="calendar-countdown-value">{{ digit.previous }}</view>
+                </view>
+                <view wx:if="{{ digit.changed }}" class="calendar-countdown-half calendar-countdown-flip-top">
+                    <view class="calendar-countdown-value calendar-countdown-flip-front">{{ digit.previous }}</view>
+                    <view class="calendar-countdown-value calendar-countdown-flip-back">{{ digit.value }}</view>
+                </view>
+                <view wx:if="{{ digit.changed }}" class="calendar-countdown-half calendar-countdown-flip-bottom">
+                    <view class="calendar-countdown-value">{{ digit.value }}</view>
+                </view>
+            </view>
+            <text class="calendar-countdown-separator" wx:if="{{ unitIndex < countdownUnits.length - 1 }}">:</text>
         </view>
     </view>
 </view>

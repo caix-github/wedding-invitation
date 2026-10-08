@@ -39,7 +39,10 @@
 		"disableUseStrict": false,
 		"useCompilerPlugins": false,
 		"useStaticServer": true,
-		"ignoreUploadUnusedFiles": true
+		"ignoreUploadUnusedFiles": true,
+		"compileWorklet": false,
+		"localPlugins": false,
+		"condition": false
 	},
 	"compileType": "miniprogram",
 	"condition": {},
@@ -53,5 +56,6 @@
 		"ignore": [],
 		"include": []
 	},
-	"appid": "wx6a2d0773d3fd3d24"
+	"appid": "wx2629ed812f2aead5",
+	"simulatorPluginLibVersion": {}
 }

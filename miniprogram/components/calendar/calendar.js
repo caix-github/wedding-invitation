@@ -17,12 +17,17 @@ Component({
         year: '',
         month: '',
         day: '',
-        dayNumber: ''
+        dayNumber: '',
+        weddingClock: '',
+        countdownUnits: [],
+        countdownFlip: false
     },
     
     lifetimes: {
         created() {
             this.lunisolarDate = null
+            this.countdownTimer = null
+            this.countdownSettleTimer = null
         },
 
         attached() {
@@ -63,8 +68,90 @@ Component({
                     year,
                     month: addZero(month),
                     day: addZero(day),
-                    dayNumber: day
+                    dayNumber: day,
+                    weddingClock: (/[ T](\d{1,2}:\d{2})/.exec(this.data.date) || [])[1] || ''
                 })
+
+                const weddingTime = new Date(this.data.date.replace(/-/g, '/')).getTime()
+                if (Number.isNaN(weddingTime)) {
+                    console.error('Invalid wedding date; countdown is unavailable.')
+                    return
+                }
+
+                this.updateCountdown(weddingTime)
+                if (weddingTime > Date.now()) {
+                    this.countdownTimer = setInterval(() => this.updateCountdown(weddingTime), 1000)
+                }
+            }
+        },
+
+        detached() {
+            if (this.countdownTimer !== null) {
+                clearInterval(this.countdownTimer)
+                this.countdownTimer = null
+            }
+            if (this.countdownSettleTimer !== null) {
+                clearTimeout(this.countdownSettleTimer)
+                this.countdownSettleTimer = null
+            }
+        }
+    },
+
+    methods: {
+        updateCountdown(weddingTime) {
+            const remaining = Math.max(weddingTime - Date.now(), 0)
+            const days = Math.floor(remaining / 86400000)
+            const hours = Math.floor(remaining % 86400000 / 3600000)
+            const minutes = Math.floor(remaining % 3600000 / 60000)
+            const seconds = Math.floor(remaining % 60000 / 1000)
+            const pad = value => value < 10 ? `0${value}` : `${value}`
+            const previousUnits = this.data.countdownUnits
+            const values = [pad(days), pad(hours), pad(minutes), pad(seconds)]
+            const labels = ['days', 'hours', 'minutes', 'seconds']
+            const countdownUnits = values.map((value, unitIndex) => {
+                const previousUnit = previousUnits[unitIndex]
+                let previousValue = previousUnit
+                    ? previousUnit.digits.map(digit => digit.value).join('')
+                    : value
+                const width = Math.max(value.length, previousValue.length)
+
+                while (value.length < width) value = `0${value}`
+                while (previousValue.length < width) previousValue = `0${previousValue}`
+
+                return {
+                    label: labels[unitIndex],
+                    digits: value.split('').map((digit, digitIndex) => ({
+                        key: `${labels[unitIndex]}-${digitIndex}`,
+                        value: digit,
+                        previous: previousValue[digitIndex],
+                        changed: Boolean(previousUnit) && digit !== previousValue[digitIndex]
+                    }))
+                }
+            })
+
+            this.setData({
+                countdownUnits
+            })
+
+            if (this.countdownSettleTimer !== null) {
+                clearTimeout(this.countdownSettleTimer)
+            }
+            this.countdownSettleTimer = setTimeout(() => {
+                const settledUnits = this.data.countdownUnits.map(unit => ({
+                    ...unit,
+                    digits: unit.digits.map(digit => ({
+                        ...digit,
+                        previous: digit.value,
+                        changed: false
+                    }))
+                }))
+                this.setData({ countdownUnits: settledUnits })
+                this.countdownSettleTimer = null
+            }, 650)
+
+            if (remaining === 0 && this.countdownTimer !== null) {
+                clearInterval(this.countdownTimer)
+                this.countdownTimer = null
             }
         }
     }

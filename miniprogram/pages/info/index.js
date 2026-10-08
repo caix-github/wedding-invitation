@@ -29,25 +29,25 @@ Page({
 
         // 定位信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
-            name: '婚宴酒店：XXXXXXXX',
-            address: '详细地址XXXXXXXXXXXXXXX',
-            latitude: 23.03387641906739,
-            longitude: 113.7241439819336
+            name: '婚宴酒店：丽枫酒店（揭阳潮汕机场店）',
+            address: '详细地址：广东省揭阳市榕城区大青溪石材市场西侧180米',
+            latitude: 23.492850,
+            longitude: 116.497312
         }]),
 
         // PDF资料（在云开发的「存储」里上传文件，就可以得到fileID了）
         files: [{
-            name: '凌晨接亲时间表',
-            fileID: 'cloud://online-xxxxxxxxx'
+            name: '接亲时间表',
+            fileID: 'cloud://cloudbase-d3gdptj5haed10ab8.636c-cloudbase-d3gdptj5haed10ab8-1490539777/接亲时间表.txt'
         }, {
-            name: '婚礼时间表',
-            fileID: 'cloud://online-xxxxxxxxx'
+            name: '宴席时间表',
+            fileID: 'cloud://cloudbase-d3gdptj5haed10ab8.636c-cloudbase-d3gdptj5haed10ab8-1490539777/宴席时间表.txt'
         }],
 
         // 其它事项
         info: [
-            `各位需要过夜的兄弟姐妹酒店已安排好，入住时报新郎名字和手机号码即可（${couple[0].name}，${couple[0].number}），酒店有停车场，可免费停车，除了伴娘阿卡是单人间以外其他人都是双床房`,
-            '兄弟团先去洗头做发型再到我家集合，尽量8点半前到，实在有事的话最晚9点到，兄弟们把控好时间哈，辛苦大家',
+            `各位需要过夜的兄弟姐妹酒店已安排好，入住时报新郎名字和手机号码即可（${couple[0].name}，${couple[0].number}），酒店有停车场，可免费停车`,
+            '大家尽量9点半前到，实在有事的话最晚10点到，兄弟们把控好时间哈，辛苦大家',
             '最后的最后，文明接亲，欢乐接亲，希望大家多多配合，有什么需要，请联系帅气的新郎哥和美丽的新娘子，如有疏漏，请多多包涵'
         ]
     },
@@ -89,7 +89,6 @@ Page({
                     wx.openDocument({
                         filePath: res.tempFilePath,
                         showMenu: true,
-                        fileType: 'pdf',
                         success: () => {
                             wx.hideLoading()
                         }

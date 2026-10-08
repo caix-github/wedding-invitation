@@ -1,7 +1,7 @@
 .calendar {
     width: 576rpx;
     border: 20rpx solid rgb(133, 22, 14);
-    margin: 0 auto 152rpx;
+    margin: 0 auto 40rpx;
     padding: 72rpx;
     color: rgb(133, 22, 14);
     line-height: 1;
@@ -31,11 +31,27 @@
 .calendar-month-day {
     font-size: 72rpx;
     text-align: left;
-    margin-bottom: 60rpx;
+    margin-bottom: 12rpx;
 }
 
 .calendar-month-day .calendar-month-day-sep {
     font-size: 32rpx;
+}
+
+.calendar-countdown-title {
+    margin-top: 22rpx;
+    margin-bottom: 18rpx;
+    color: rgba(133, 22, 14, .68);
+    font-size: 20rpx;
+    letter-spacing: 4rpx;
+}
+
+.calendar-wedding-time {
+    margin-bottom: 24rpx;
+    color: rgba(133, 22, 14, .72);
+    font-size: 22rpx;
+    letter-spacing: 2rpx;
+    text-align: left;
 }
 
 .calendar-week {
@@ -72,4 +88,149 @@
     z-index: 11;
     -webkit-animation: jumpheart .8s ease infinite alternate;
     animation: jumpheart .8s ease infinite alternate;
+}
+
+.calendar-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24rpx -48rpx 0;
+}
+
+.calendar-countdown-group {
+    display: flex;
+    align-items: center;
+}
+
+.calendar-countdown-digit {
+    position: relative;
+    width: 34rpx;
+    height: 52rpx;
+    margin: 0 2rpx;
+    overflow: hidden;
+    color: #FFF8F3;
+    background: linear-gradient(180deg, #A9473D 0%, #923126 49%, #762017 50%, #923126 100%);
+    border-radius: 5rpx;
+    box-shadow: 0 4rpx 8rpx rgba(104, 30, 22, .2);
+    -webkit-perspective: 300rpx;
+    perspective: 300rpx;
+}
+
+.calendar-countdown-digit::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2rpx;
+    background: rgba(83, 18, 12, .46);
+    box-shadow: 0 1rpx 1rpx rgba(255, 248, 243, .16);
+}
+
+.calendar-countdown-half {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background: linear-gradient(180deg, #A9473D, #923126);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.calendar-countdown-static-top {
+    top: 0;
+}
+
+.calendar-countdown-static-bottom {
+    bottom: 0;
+    background: linear-gradient(180deg, #762017, #923126);
+}
+
+.calendar-countdown-value {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 52rpx;
+    font-size: 44rpx;
+    line-height: 52rpx;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+.calendar-countdown-static-bottom .calendar-countdown-value,
+.calendar-countdown-flip-bottom .calendar-countdown-value {
+    top: -26rpx;
+}
+
+.calendar-countdown-flip-top {
+    top: 0;
+    z-index: 3;
+    transform-origin: 50% 100%;
+    -webkit-animation: calendarCountdownTopFlip .3s ease-in forwards;
+    animation: calendarCountdownTopFlip .3s ease-in forwards;
+}
+
+.calendar-countdown-flip-front {
+    top: 0;
+}
+
+.calendar-countdown-flip-back {
+    top: 0;
+    transform: rotateX(180deg);
+}
+
+.calendar-countdown-flip-bottom {
+    bottom: 0;
+    z-index: 2;
+    transform-origin: 50% 0;
+    transform: rotateX(90deg);
+    -webkit-animation: calendarCountdownBottomFlip .3s .3s ease-out forwards;
+    animation: calendarCountdownBottomFlip .3s .3s ease-out forwards;
+}
+
+.calendar-countdown-separator {
+    margin: 0 3rpx;
+    color: rgb(133, 22, 14);
+    font-size: 34rpx;
+    line-height: 1;
+    font-weight: 700;
+    text-shadow: 0 1rpx 1rpx rgba(255, 255, 255, .7);
+}
+
+@keyframes calendarCountdownTopFlip {
+    0% {
+        transform: rotateX(0);
+    }
+    100% {
+        transform: rotateX(-180deg);
+    }
+}
+
+@keyframes calendarCountdownBottomFlip {
+    0% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0);
+    }
+}
+
+@-webkit-keyframes calendarCountdownTopFlip {
+    0% {
+        -webkit-transform: rotateX(0);
+    }
+    100% {
+        -webkit-transform: rotateX(-180deg);
+    }
+}
+
+@-webkit-keyframes calendarCountdownBottomFlip {
+    0% {
+        -webkit-transform: rotateX(90deg);
+    }
+    100% {
+        -webkit-transform: rotateX(0);
+    }
 }

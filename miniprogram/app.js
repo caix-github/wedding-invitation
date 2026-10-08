@@ -1,3 +1,11 @@
+/*
+ * @Author: caix cai1058@qq.com
+ * @Date: 2026-09-16 21:44:37
+ * @LastEditors: caix cai1058@qq.com
+ * @LastEditTime: 2026-10-07 17:45:02
+ * @FilePath: \wedding-invitation\miniprogram\app.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 App({
     globalData: {
         isSinglePage: null, // 是否单页模式
@@ -6,16 +14,11 @@ App({
         // 以上变量都不用动，以下变量是需要修改的
 
         // 云开发服务是否已下架
-        // isRemoved: new Date() * 1 >= 1699401600000, // 自动党，用指定时间戳来控制自动下架
-        isRemoved: true, // 手动党（为防止加载初始项目时因为没有云开发环境而报错，我先设为true，等搞好云开发环境后再把它改回false）
+        // isRemoved: Date.now() >= new Date('2026-10-08 19:30:00').getTime(), // 自动党，用指定时间戳来控制自动下架
+        isRemoved: false, // 手动党（为防止加载初始项目时因为没有云开发环境而报错，我先设为true，等搞好云开发环境后再把它改回false）
 
         // 魔法开关，开启后可使用完整功能，包括填写表单、祝福语轮播和视频号播放器等等
-        // magic: new Date() * 1 >= 1699401600000, // 自动党，用指定时间戳来控制自动开启
-        // magic: true, // 手动党（方便预览完整功能，我先设为true）
-        // const target = new Date('2023-11-08 08:00:00');
-        // const isOver = Date.now() >= target.getTime();
-        // console.log(isOver);
-        magic: Date.now() >= new Date('2026-10-08 19:30:00').getTime(),
+        magic: Date.now() >= new Date('2026-10-09 13:00:00').getTime(),
 
         // 婚礼日期时间
         weddingTime: '2026-11-19 12:00:00',
@@ -36,7 +39,7 @@ App({
         }],
 
         // 发布者（自己想个你俩人的噱头组合名呗）
-        publisher: '蔡鑫洁琼',
+        publisher: '鑫洁所向',
 
         // 纪念日（如果是一见钟情的话，建议用第一次见面那天）
         anniversary: '2024.01.07'
@@ -45,7 +48,7 @@ App({
     // 小程序启动时，初始化云开发环境
     onLaunch() {
         !this.globalData.isRemoved && wx.cloud.init({
-            env: 'xxxxxxx', // 云开发环境ID，在云开发控制台里可以查看
+            env: 'cloudbase-d3gdptj5haed10ab8', // 云开发环境ID，在云开发控制台里可以查看
             traceUser: true
         })
 

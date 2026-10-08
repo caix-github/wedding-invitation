@@ -3,7 +3,7 @@ const {
 } = require('../../common/utils')
 
 // 管理员openid列表，可以在云开发管理页找到，是管理员的话可以看到公告栏页面入口，也可以通过云函数greetings的返回值openid来查看，还可以在本文件getGreetings方法里通过打印openid变量来查看
-const MANAGER = ['']
+const MANAGER = ['os2PD5C1AHTd0GFLpa3psQC8lEeg']
 
 const APP = getApp()
 const isRemoved = APP.globalData.isRemoved
@@ -24,21 +24,102 @@ Page({
         weddingTimeStr: [], // 格式化的婚礼日期列表
         currentTemplate: APP.globalData.currentTemplate, // 当前模板
 
-        // 五迷模板素材
-        maydayImgs: {
-            mascot: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/mascot.png',
-            announcement: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/announcement.png',
-            scene: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/scene.png',
-            calendarArt: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/calendar-art.png',
-            characters: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/characters.png',
-            couple: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/couple.png',
-            cats: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cats.png',
-            network: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/network1.png',
-            peachBride: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/peach-bride.png',
-            petLogo: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/pet-logo.png'
+        // 以上变量都不用动，以下变量是需要手动修改的
+        // 经典模板
+        classicTemplate: {
+            publisher: APP.globalData.publisher,
+            anniversary: APP.globalData.anniversary,
+            musicList: [{
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac',
+                name: '是你',
+                singer: '梦然'
+            }, {
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3',
+                name: '有点甜',
+                singer: '汪苏泷'
+            },{
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/Allez.mp3',
+                name: 'Allez, aimez!',
+                singer: '肖战'
+            }],
+            images: {
+                cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
+                cover1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover1.jpg',
+                poster: 'https://res.wx.qq.com/t/fed_upload/d811d254-e5d6-4c19-9ff8-77c4b6128137/poster.jpg',
+                swiper1: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-1-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-2-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-3-1-1.png'
+                ],
+                series: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series2-1.jpg'
+                ],
+                leftUp: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up.jpg',
+                leftUp1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up1.jpg',
+                leftDown: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-down.jpg',
+                swiper2: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-2.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-3.jpg'
+                ],
+                swiper2Static: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-static-1.jpg',
+                swiper3: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-1-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-2-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-3-1.jpg'
+                ],
+                end1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
+                end2: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/end2.jpg'
+            }
         },
 
-        // 以上变量都不用动，以下变量是需要手动修改的
+        // 五迷模板
+        maydayTemplate: {
+            musicList: [{
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac',
+                name: '最重要的小事',
+                singer: '五月天'
+            }, {
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/zzzs.mp3',
+                name: '知足',
+                singer: '五月天'
+            }],
+            images: {
+                mascot: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/mascot.png',
+                announcement: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/announcement.png',
+                scene: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/scene.png',
+                calendarArt: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/calendar-art.png',
+                characters: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/characters.png',
+                couple: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/couple.png',
+                cats: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cats.png',
+                network: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/network1.png',
+                peachBride: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/peach-bride.png',
+                petLogo: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/pet-logo.png',
+                swiper: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-3.jpg'
+                ],
+                series: [
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls1.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls2.jpg',
+                    '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls3.jpg'
+                ]
+            }
+        },
+
+        // 两种模板共用的照片素材
+        sharedImages: {
+            husband: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/husband-1.jpg',
+            wife: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife-1.jpg',
+            map: [
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map1-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map2-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map3-1.jpg',
+                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map4-1.jpg'
+            ]
+        },
 
         // 祝福语列表
         greetings: isRemoved ? [
@@ -54,18 +135,6 @@ Page({
             }
         ] : [],
 
-        // 背景音乐
-        classicMusic: {
-            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac', // 音频资源链接
-            name: '是你', // 歌名
-            singer: '梦然' // 歌手名
-        },
-        // 五迷模板背景音乐（五月天《最重要的小事》）
-        maydayMusic: {
-            src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac', // 五月天 - 最重要的小事
-            name: '最重要的小事',
-            singer: '五月天'
-        },
         // 当前播放的音乐（根据模板动态切换）
         music: {
           src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac', // 音频资源链接
@@ -76,98 +145,17 @@ Page({
         // 酒店信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
             name: '家有婚宴',
-            address: '详细地址',
-            latitude: 23.5128675,
-            longitude: 116.4873721
+            address: '详细地址：广东省揭阳市榕城区炮台镇石牌村石龙路22号',
+            latitude: 23.498987,
+            longitude: 116.505308
         }])[0],
 
-        // 图片信息（其实就是婚纱照了）
-        imgs: {
-            // 封面图
-            // cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
-            cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
-            cover1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover1.jpg',
-
-            // 音乐封面
-            poster: 'https://res.wx.qq.com/t/fed_upload/d811d254-e5d6-4c19-9ff8-77c4b6128137/poster.jpg',
-
-            // 新郎独照
-            husband: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/husband-1.jpg',
-
-            // 新娘独照
-            wife: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/wife-1.jpg',
-
-            // 轮播图1
-            swiper1: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-1-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-2-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper1-3-1.jpg'
-            ],
-
-            // 五迷模式轮播图1
-            swiperWmls1: [
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-1.jpg',
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-3.jpg'
-            ],
-
-            // 连续图
-            series: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series2-1.jpg',
-                // '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/series3.jpg'
-            ],
-
-            // 连续图
-            serieswmls: [
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls1.jpg',
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls2.jpg',
-              '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/serieswmls3.jpg'
-            ],
-
-            // 左上图
-            leftUp: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up.jpg',
-            leftUp1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-up1.jpg',
-
-            // 左下图
-            leftDown: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/left-down.jpg',
-
-            // 四宫图
-            map: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map1-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map2-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map3-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/map4-1.jpg'
-            ],
-
-            // 轮播图2
-            swiper2: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-2.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-3.jpg'
-            ],
-
-            // 轮播图2下方常驻图
-            swiper2Static: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-static-1.jpg',
-
-            // 轮播图3
-            swiper3: [
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-1-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-2-1.jpg',
-                '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiper2-3-1.jpg'
-            ],
-
-            // 结尾图1
-            end1: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/swiperWmls1-2.jpg',
-
-            // 结尾图2
-            end2: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/end2.jpg'
-        }
     },
 
     // 小程序加载时，拉取表单信息并填充，以及格式化各种婚礼时间
     onLoad() {
         this.timer = null
+        this.carouselTimer = null
         this.music = null
         this.isSubmit = false
 
@@ -219,6 +207,8 @@ Page({
             this.timer = null
         }
 
+        this.stopGreetingCarousel()
+
         if (this.music !== null) {
             this.music.destroy()
             this.music = null
@@ -232,6 +222,7 @@ Page({
 
             this.timer === null && (this.timer = setInterval(() => this.getGreetings(), 20000));
         }
+        this.startGreetingCarousel()
     },
 
     // 小程序不可见时，取消自动拉取祝福语定时器
@@ -240,14 +231,13 @@ Page({
             clearInterval(this.timer)
             this.timer = null
         }
+        this.stopGreetingCarousel()
     },
 
     // 小程序可用时，初始化背景音乐并自动播放
     onReady() {
         if (this.music === null) {
-            // 根据当前模板选择音乐
-            const tpl = this.data.currentTemplate
-            const initMusic = tpl === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
+            const initMusic = this.getRandomMusic(this.data.currentTemplate)
             this.setData({
                 music: initMusic,
                 musicIsPaused: !this.data.magic
@@ -417,7 +407,7 @@ Page({
                                 greeting
                             },
                             greetings
-                        })
+                        }, () => this.startGreetingCarousel())
                         this.isSubmit = false
                         wx.showToast({
                             title: `${wording}成功`,
@@ -439,23 +429,36 @@ Page({
                 openid
             }
         }) => {
+            console.log('openId: ', openid)
             const isManager = MANAGER.indexOf(openid) > -1
-            greetings.length && this.setData(this.data.activeIdx === -1 ? {
+            this.setData({
                 isManager,
                 greetings,
-                activeIdx: 0
-            } : {
-                isManager,
-                greetings
-            })
+                activeIdx: greetings.length
+                    ? Math.max(this.data.activeIdx, 0) % greetings.length
+                    : -1
+            }, () => this.startGreetingCarousel())
         })
     },
 
-    // 轮播动画结束时切换到下一个
-    onAnimationend() {
-        this.setData({
-            activeIdx: (this.data.activeIdx === this.data.greetings.length - 1) ? 0 : (this.data.activeIdx + 1)
-        })
+    // 开始循环播放祝福语
+    startGreetingCarousel() {
+        this.stopGreetingCarousel()
+        if (!this.data.magic || this.data.greetings.length < 2) return
+
+        this.carouselTimer = setInterval(() => {
+            this.setData({
+                activeIdx: (this.data.activeIdx + 1) % this.data.greetings.length
+            })
+        }, 5000)
+    },
+
+    // 停止祝福语轮播
+    stopGreetingCarousel() {
+        if (this.carouselTimer !== null) {
+            clearInterval(this.carouselTimer)
+            this.carouselTimer = null
+        }
     },
 
     // 跳转到联系新郎新娘板块
@@ -487,7 +490,7 @@ Page({
         APP.setTemplate(next)
 
         // 切换音乐：magic为true时自动播放（除非用户手动关闭了音乐）
-        const targetMusic = next === 'mayday' ? this.data.maydayMusic : this.data.classicMusic
+        const targetMusic = this.getRandomMusic(next)
         const shouldPlay = this.data.magic && !this.data.musicClosed
 
         // 销毁旧音乐
@@ -523,9 +526,17 @@ Page({
         })
 
         wx.showToast({
-            title: next === 'mayday' ? '五迷模式 · 最重要的小事' : '经典模式 · I DO',
+            title: `${next === 'mayday' ? '五迷模式' : '经典模式'} · ${targetMusic.name}`,
             icon: 'none',
             duration: 2000
         })
+    },
+
+    // 从当前模板的歌单中随机选择一首
+    getRandomMusic(template) {
+        const musicList = template === 'mayday'
+            ? this.data.maydayTemplate.musicList
+            : this.data.classicTemplate.musicList
+        return musicList[Math.floor(Math.random() * musicList.length)]
     }
 })
