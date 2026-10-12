@@ -462,6 +462,6 @@
 </view>
 
 <!-- 公告栏入口（共用） -->
-<view wx:if="{{ isManager }}" class="manager">
+<view wx:if="{{ isManager }}" class="manager {{ managerTucked ? 'manager-tucked' : '' }}">
     <image bindtap="goInfo" src="../../images/icon/manager.png" mode="widthFix"/>
 </view>

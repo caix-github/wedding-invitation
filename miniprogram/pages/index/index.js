@@ -12,6 +12,7 @@ Page({
     data: {
         ...APP.globalData,
         isManager: false, // 当前用户是否为管理员
+        managerTucked: false, // 页面滚动时收起公告栏入口
         musicIsPaused: false, // 是否暂停背景音乐
         musicExpanded: false, // 音乐面板是否展开
         musicClosed: false, // 音乐组件是否被手动关闭
@@ -32,15 +33,18 @@ Page({
             musicList: [{
                 src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sn.aac',
                 name: '是你',
-                singer: '梦然'
+                singer: '梦然',
+                weight: 2
             }, {
                 src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/sweet.mp3',
                 name: '有点甜',
-                singer: '汪苏泷'
+                singer: '汪苏泷',
+                weight: 1
             },{
                 src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/Allez.mp3',
                 name: 'Allez, aimez!',
-                singer: '肖战'
+                singer: '肖战',
+                weight: 4
             }],
             images: {
                 cover: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/cover.jpg',
@@ -79,11 +83,18 @@ Page({
             musicList: [{
                 src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/matter.aac',
                 name: '最重要的小事',
-                singer: '五月天'
+                singer: '五月天',
+                weight: 2
             }, {
-                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/zzzs.mp3',
-                name: '知足',
-                singer: '五月天'
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/renxing.mp3',
+                name: '任性',
+                singer: '五月天',
+                weight: 4
+            }, {
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/rangwozhaoguni.mp3',
+                name: '让我照顾你',
+                singer: '五月天',
+                weight: 1
             }],
             images: {
                 mascot: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/mascot.png',
@@ -156,6 +167,7 @@ Page({
     onLoad() {
         this.timer = null
         this.carouselTimer = null
+        this.managerRestoreTimer = null
         this.music = null
         this.isSubmit = false
 
@@ -209,6 +221,11 @@ Page({
 
         this.stopGreetingCarousel()
 
+        if (this.managerRestoreTimer !== null) {
+            clearTimeout(this.managerRestoreTimer)
+            this.managerRestoreTimer = null
+        }
+
         if (this.music !== null) {
             this.music.destroy()
             this.music = null
@@ -234,10 +251,27 @@ Page({
         this.stopGreetingCarousel()
     },
 
+    // 页面滚动时收起公告栏入口，停止滚动后恢复
+    onPageScroll() {
+        if (!this.data.managerTucked) {
+            this.setData({ managerTucked: true })
+        }
+
+        if (this.managerRestoreTimer !== null) {
+            clearTimeout(this.managerRestoreTimer)
+        }
+        this.managerRestoreTimer = setTimeout(() => {
+            this.managerRestoreTimer = null
+            this.setData({ managerTucked: false })
+        }, 800)
+    },
+
     // 小程序可用时，初始化背景音乐并自动播放
     onReady() {
         if (this.music === null) {
-            const initMusic = this.getRandomMusic(this.data.currentTemplate)
+            const musicIndex = this.getRandomMusicIndex(this.data.currentTemplate)
+            const initMusic = this.getMusicList(this.data.currentTemplate)[musicIndex]
+            this.musicIndex = musicIndex
             this.setData({
                 music: initMusic,
                 musicIsPaused: !this.data.magic
@@ -246,7 +280,9 @@ Page({
                 useWebAudioImplement: false
             })
             this.music.src = initMusic.src
-            this.music.loop = true
+            this.music.loop = false
+
+            this.music.onEnded(() => this.playNextMusic())
 
             // 错误监听
             this.music.onError((err) => {
@@ -438,6 +474,15 @@ Page({
                     ? Math.max(this.data.activeIdx, 0) % greetings.length
                     : -1
             }, () => this.startGreetingCarousel())
+
+            if (isManager && !wx.getStorageSync('managerNoticeShown_v1')) {
+                wx.setStorageSync('managerNoticeShown_v1', true)
+                wx.showModal({
+                    title: '公告栏提醒',
+                    content: '这里是公告栏入口，点击可查看婚礼公告和相关信息。',
+                    showCancel: false
+                })
+            }
         })
     },
 
@@ -490,7 +535,9 @@ Page({
         APP.setTemplate(next)
 
         // 切换音乐：magic为true时自动播放（除非用户手动关闭了音乐）
-        const targetMusic = this.getRandomMusic(next)
+        const musicIndex = this.getRandomMusicIndex(next)
+        const targetMusic = this.getMusicList(next)[musicIndex]
+        this.musicIndex = musicIndex
         const shouldPlay = this.data.magic && !this.data.musicClosed
 
         // 销毁旧音乐
@@ -504,7 +551,9 @@ Page({
             useWebAudioImplement: false
         })
         this.music.src = targetMusic.src
-        this.music.loop = true
+        this.music.loop = false
+
+        this.music.onEnded(() => this.playNextMusic())
 
         this.music.onError((err) => {
             console.error('音乐播放错误:', err)
@@ -532,11 +581,41 @@ Page({
         })
     },
 
-    // 从当前模板的歌单中随机选择一首
-    getRandomMusic(template) {
-        const musicList = template === 'mayday'
+    // 获取当前模板歌单
+    getMusicList(template) {
+        return template === 'mayday'
             ? this.data.maydayTemplate.musicList
             : this.data.classicTemplate.musicList
-        return musicList[Math.floor(Math.random() * musicList.length)]
+    },
+
+    // 按权重随机选择起播曲目
+    getRandomMusicIndex(template) {
+        const musicList = this.getMusicList(template)
+        const weights = musicList.map(music => {
+            const weight = Number(music.weight)
+            return Number.isFinite(weight) && weight > 0 ? weight : 0
+        })
+        const totalWeight = weights.reduce((total, weight) => total + weight, 0)
+
+        if (!totalWeight) return 0
+
+        let randomWeight = Math.random() * totalWeight
+        for (let index = 0; index < weights.length; index++) {
+            randomWeight -= weights[index]
+            if (randomWeight < 0) return index
+        }
+        return 0
+    },
+
+    // 按歌单顺序播放下一首，播放到末尾后从头循环
+    playNextMusic() {
+        const musicList = this.getMusicList(this.data.currentTemplate)
+        if (!musicList.length) return
+
+        this.musicIndex = ((this.musicIndex || 0) + 1) % musicList.length
+        const nextMusic = musicList[this.musicIndex]
+        this.music.src = nextMusic.src
+        this.setData({ music: nextMusic })
+        this.music.play()
     }
 })
