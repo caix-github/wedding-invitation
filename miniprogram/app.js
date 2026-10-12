@@ -14,11 +14,11 @@ App({
         // 以上变量都不用动，以下变量是需要修改的
 
         // 云开发服务是否已下架
-        // isRemoved: Date.now() >= new Date('2026-10-08 19:30:00').getTime(), // 自动党，用指定时间戳来控制自动下架
-        isRemoved: false, // 手动党（为防止加载初始项目时因为没有云开发环境而报错，我先设为true，等搞好云开发环境后再把它改回false）
+        isRemoved: Date.now() >= new Date('2026-11-20 00:00:00').getTime(), // 自动党，用指定时间戳来控制自动下架
+        // isRemoved: false, // 手动党（为防止加载初始项目时因为没有云开发环境而报错，我先设为true，等搞好云开发环境后再把它改回false）
 
         // 魔法开关，开启后可使用完整功能，包括填写表单、祝福语轮播和视频号播放器等等
-        magic: Date.now() >= new Date('2026-10-09 13:00:00').getTime(),
+        magic: Date.now() >= new Date('2026-10-12 19:00:00').getTime(),
 
         // 婚礼日期时间
         weddingTime: '2026-11-19 12:00:00',
