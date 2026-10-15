@@ -54,30 +54,53 @@
     height: 652rpx;
 }
 
+/* 右侧悬浮操作按钮 */
+.floating-actions {
+    position: fixed;
+    right: 30rpx;
+    bottom: 140rpx;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 24rpx;
+}
+
+.floating-actions .manager {
+    border: 4rpx solid #fff;
+    background: linear-gradient(135deg, #FFD166 0%, #FF9F43 100%);
+    box-shadow: 0 8rpx 28rpx rgba(255, 159, 67, .65);
+}
+
+.floating-action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex: none;
+    width: 88rpx;
+    height: 88rpx;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, .4);
+}
+
 /* 音乐悬浮组件 */
 .music-float {
     position: fixed;
     top: 20rpx;
-    right: 20rpx;
+    right: 30rpx;
     z-index: 99999999;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .music-float-icon {
     position: relative;
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-    border-radius: 50%;
-    width: 72rpx;
-    height: 72rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.35);
     -webkit-animation: mrotate 5s linear infinite;
     animation: mrotate 5s linear infinite;
     overflow: hidden;
-    flex-shrink: 0;
 }
 
 @-webkit-keyframes mrotate {
@@ -99,10 +122,10 @@
 
 .music-float-icon.paused::after {
     content: "";
-    width: 72rpx;
+    width: 88rpx;
     height: 0;
     position: absolute;
-    top: 34rpx;
+    top: 42rpx;
     left: 0;
     border-top: 4rpx solid rgba(255, 255, 255, 0.8);
     -webkit-transform: rotate(45deg);
@@ -110,8 +133,12 @@
 }
 
 .music-float-icon image {
-    width: 40rpx;
-    height: 40rpx;
+    width: 48rpx;
+    height: 48rpx;
+}
+
+.music-float-mini-icon {
+    font-size: 32rpx;
 }
 
 .music-float-panel {
@@ -157,48 +184,87 @@
     line-height: 1.2;
 }
 
-.music-float-poster {
-    width: 64rpx;
-    height: 64rpx;
-    border-radius: 12rpx;
+.music-float-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-}
-
-.music-float-close {
-    width: 40rpx;
-    height: 40rpx;
-    line-height: 36rpx;
-    text-align: center;
-    font-size: 32rpx;
-    color: #FF6B6B;
-    background: rgba(255, 107, 107, 0.1);
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.music-float-close:active {
-    background: rgba(255, 107, 107, 0.2);
-}
-
-/* 收起迷你状态 */
-.music-float-mini {
-    width: 48rpx;
-    height: 48rpx;
+    box-sizing: border-box;
+    width: 44rpx;
+    height: 44rpx;
     border-radius: 50%;
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-    box-shadow: 0 4rpx 12rpx rgba(255, 107, 107, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.6;
-}
-
-.music-float-mini:active {
-    opacity: 1;
-}
-
-.music-float-mini-icon {
+    color: #fff;
     font-size: 22rpx;
+    line-height: 1;
+}
+
+.confetti-float {
+    padding: 0;
+}
+
+.confetti-float:active {
+    transform: scale(.9);
+}
+
+.confetti-float-icon {
+    line-height: 1;
+    font-size: 38rpx;
+}
+
+.confetti-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 99999998;
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    display: block;
+    font-size: 36rpx;
+    line-height: 1;
+    opacity: 0;
+    animation-duration: 2200ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.confetti-piece-left-1 { left: -40rpx; top: 8%; animation-name: confettiFromLeft; }
+.confetti-piece-left-2 { left: -40rpx; top: 20%; animation-name: confettiFromLeft; animation-delay: 80ms; }
+.confetti-piece-left-3 { left: -40rpx; top: 32%; animation-name: confettiFromLeft; animation-delay: 160ms; }
+.confetti-piece-left-4 { left: -40rpx; top: 44%; animation-name: confettiFromLeft; animation-delay: 240ms; }
+.confetti-piece-left-5 { left: -40rpx; top: 56%; animation-name: confettiFromLeft; animation-delay: 120ms; }
+.confetti-piece-left-6 { left: -40rpx; top: 68%; animation-name: confettiFromLeft; animation-delay: 200ms; }
+.confetti-piece-left-7 { left: -40rpx; top: 80%; animation-name: confettiFromLeft; animation-delay: 280ms; }
+.confetti-piece-left-8 { left: -40rpx; top: 92%; animation-name: confettiFromLeft; animation-delay: 40ms; }
+.confetti-piece-right-1 { right: -40rpx; top: 8%; animation-name: confettiFromRight; animation-delay: 120ms; }
+.confetti-piece-right-2 { right: -40rpx; top: 20%; animation-name: confettiFromRight; animation-delay: 200ms; }
+.confetti-piece-right-3 { right: -40rpx; top: 32%; animation-name: confettiFromRight; animation-delay: 40ms; }
+.confetti-piece-right-4 { right: -40rpx; top: 44%; animation-name: confettiFromRight; animation-delay: 160ms; }
+.confetti-piece-right-5 { right: -40rpx; top: 56%; animation-name: confettiFromRight; animation-delay: 280ms; }
+.confetti-piece-right-6 { right: -40rpx; top: 68%; animation-name: confettiFromRight; animation-delay: 80ms; }
+.confetti-piece-right-7 { right: -40rpx; top: 80%; animation-name: confettiFromRight; animation-delay: 240ms; }
+.confetti-piece-right-8 { right: -40rpx; top: 92%; animation-name: confettiFromRight; animation-delay: 320ms; }
+
+@keyframes confettiFromLeft {
+    0% { opacity: 0; transform: translate(0, 24rpx) scale(.5) rotate(0); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(110vw, -80rpx) scale(1.2) rotate(540deg); }
+}
+
+@keyframes confettiFromRight {
+    0% { opacity: 0; transform: translate(0, 24rpx) scale(.5) rotate(0); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-110vw, -80rpx) scale(1.2) rotate(-540deg); }
+}
+
+.music-float-control:active {
+    opacity: 0.8;
 }
 
 .img-introduce {
@@ -705,32 +771,22 @@
 }
 
 .manager {
-    position: fixed;
-    top: 50%;
-    left: 20rpx;
     padding: 0;
-    transform: translateY(-50%);
-    z-index: 99999999;
-    opacity: 1;
-    transition: transform .25s ease, opacity .25s ease;
+    transition: opacity .25s ease;
 }
 
 .manager.manager-tucked {
-    transform: translate(-72%, -50%);
     opacity: .45;
 }
 
 .manager image {
-    width: 120rpx;
-    height: 120rpx;
+    width: 48rpx;
+    height: 48rpx;
 }
 
 /* ===== 模板切换按钮 ===== */
 .tpl-switch {
-    position: fixed;
-    bottom: 140rpx;
-    right: 30rpx;
-    z-index: 99999999;
+    flex: none;
 }
 
 .tpl-switch-inner {
@@ -738,11 +794,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100rpx;
-    height: 100rpx;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-    box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, .4);
     transition: transform 0.2s;
 }
 

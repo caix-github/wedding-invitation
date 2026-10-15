@@ -16,6 +16,7 @@ Page({
         musicIsPaused: false, // 是否暂停背景音乐
         musicExpanded: false, // 音乐面板是否展开
         musicClosed: false, // 音乐组件是否被手动关闭
+        confetti: [], // 撒花动画粒子
         activeIdx: isRemoved ? 0 : -1, // 祝福语轮播用，当前显示的祝福语索引值
         form: { // 表单信息
             name: '',
@@ -168,6 +169,8 @@ Page({
         this.timer = null
         this.carouselTimer = null
         this.managerRestoreTimer = null
+        this.confettiTimer = null
+        this.confettiSequence = 0
         this.music = null
         this.isSubmit = false
 
@@ -224,6 +227,11 @@ Page({
         if (this.managerRestoreTimer !== null) {
             clearTimeout(this.managerRestoreTimer)
             this.managerRestoreTimer = null
+        }
+
+        if (this.confettiTimer !== null) {
+            clearTimeout(this.confettiTimer)
+            this.confettiTimer = null
         }
 
         if (this.music !== null) {
@@ -355,6 +363,28 @@ Page({
                 musicIsPaused: true
             })
         }
+    },
+
+    // 点击独立按钮触发撒花特效
+    launchConfetti() {
+        this.confettiSequence += 1
+        const sequence = this.confettiSequence
+        const symbols = ['🌸', '✨', '💖', '🎉']
+        const confetti = Array.from({ length: 16 }, (_, index) => ({
+            id: `${sequence}-${index}`,
+            symbol: symbols[index % symbols.length],
+            side: index < 8 ? 'left' : 'right',
+            position: index % 8 + 1
+        }))
+        this.setData({ confetti })
+
+        if (this.confettiTimer !== null) {
+            clearTimeout(this.confettiTimer)
+        }
+        this.confettiTimer = setTimeout(() => {
+            this.confettiTimer = null
+            this.setData({ confetti: [] })
+        }, 2600)
     },
 
     // 打开酒店定位
