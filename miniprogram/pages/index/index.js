@@ -12,7 +12,7 @@ Page({
     data: {
         ...APP.globalData,
         isManager: false, // 当前用户是否为管理员
-        managerTucked: false, // 页面滚动时收起公告栏入口
+        actionsTucked: false, // 页面滚动时收起悬浮操作按钮
         musicIsPaused: false, // 是否暂停背景音乐
         musicExpanded: false, // 音乐面板是否展开
         musicClosed: false, // 音乐组件是否被手动关闭
@@ -96,6 +96,11 @@ Page({
                 name: '让我照顾你',
                 singer: '五月天',
                 weight: 1
+            }, {
+                src: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/yinweinisuoyiwo.aac',
+                name: '因为你所以我',
+                singer: '五月天',
+                weight: 3
             }],
             images: {
                 mascot: '//cdn.jsdmirror.com/gh/caix-github/wedding-pics/mascot.png',
@@ -168,7 +173,7 @@ Page({
     onLoad() {
         this.timer = null
         this.carouselTimer = null
-        this.managerRestoreTimer = null
+        this.actionsRestoreTimer = null
         this.confettiTimer = null
         this.confettiSequence = 0
         this.music = null
@@ -224,9 +229,9 @@ Page({
 
         this.stopGreetingCarousel()
 
-        if (this.managerRestoreTimer !== null) {
-            clearTimeout(this.managerRestoreTimer)
-            this.managerRestoreTimer = null
+        if (this.actionsRestoreTimer !== null) {
+            clearTimeout(this.actionsRestoreTimer)
+            this.actionsRestoreTimer = null
         }
 
         if (this.confettiTimer !== null) {
@@ -259,18 +264,18 @@ Page({
         this.stopGreetingCarousel()
     },
 
-    // 页面滚动时收起公告栏入口，停止滚动后恢复
+    // 页面滚动时收起悬浮操作按钮，停止滚动后恢复
     onPageScroll() {
-        if (!this.data.managerTucked) {
-            this.setData({ managerTucked: true })
+        if (!this.data.actionsTucked) {
+            this.setData({ actionsTucked: true })
         }
 
-        if (this.managerRestoreTimer !== null) {
-            clearTimeout(this.managerRestoreTimer)
+        if (this.actionsRestoreTimer !== null) {
+            clearTimeout(this.actionsRestoreTimer)
         }
-        this.managerRestoreTimer = setTimeout(() => {
-            this.managerRestoreTimer = null
-            this.setData({ managerTucked: false })
+        this.actionsRestoreTimer = setTimeout(() => {
+            this.actionsRestoreTimer = null
+            this.setData({ actionsTucked: false })
         }, 800)
     },
 
@@ -352,7 +357,7 @@ Page({
 
     // 点击右上角音乐按钮控制音频播放和暂停
     toggleMusic() {
-        if (this.music.paused) {
+        if (this.data.musicIsPaused) {
             this.music.play()
             this.setData({
                 musicIsPaused: false
@@ -509,7 +514,7 @@ Page({
                 wx.setStorageSync('managerNoticeShown_v1', true)
                 wx.showModal({
                     title: '公告栏提醒',
-                    content: '这里是公告栏入口，点击可查看婚礼公告和相关信息。',
+                    content: '点击右下角的公告栏按钮，可查看酒店信息和接亲相关细节。',
                     showCancel: false
                 })
             }
@@ -597,6 +602,11 @@ Page({
             currentTemplate: next,
             musicIsPaused: !shouldPlay,
             music: targetMusic
+        }, () => {
+            wx.pageScrollTo({
+                scrollTop: 0,
+                duration: 300
+            })
         })
 
         // 更新导航栏标题

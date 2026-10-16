@@ -1,6 +1,6 @@
 <!-- 模板切换按钮 -->
 <!-- 音乐播放器固定在右上角 -->
-<view wx:if="{{ magic }}" class="music-float {{ musicExpanded ? 'expanded' : '' }} {{ musicClosed ? 'closed' : '' }}">
+<view wx:if="{{ magic }}" class="music-float {{ musicExpanded ? 'expanded' : '' }} {{ musicClosed ? 'closed' : '' }} {{ actionsTucked ? 'actions-tucked' : '' }}">
     <view wx:if="{{ musicClosed }}" class="music-float-icon floating-action-button" bindtap="reopenMusic">
         <text class="music-float-mini-icon">🎵</text>
     </view>
@@ -19,18 +19,20 @@
 </view>
 
 <view class="floating-actions">
-    <view wx:if="{{ isManager }}" class="manager floating-action-button {{ managerTucked ? 'manager-tucked' : '' }}" bindtap="goInfo" role="button" aria-label="公告栏">
-        <image src="../../images/icon/manager.png" mode="aspectFit" />
+    <view wx:if="{{ isManager }}" class="manager floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}" bindtap="goInfo" role="button" aria-label="公告栏">
+        <text class="floating-action-icon">📢</text>
+        <text class="floating-action-text">公告栏</text>
     </view>
 
-    <view class="confetti-float floating-action-button" bindtap="launchConfetti" role="button" aria-label="撒花">
-        <text class="confetti-float-icon">🎉</text>
+    <view class="confetti-float floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}" bindtap="launchConfetti" role="button" aria-label="撒花">
+        <text class="floating-action-icon">🎉</text>
+        <text class="floating-action-text">撒花</text>
     </view>
 
     <view class="tpl-switch" bindtap="switchTemplate">
-        <view class="tpl-switch-inner floating-action-button">
-            <text class="tpl-switch-icon">{{ currentTemplate === 'classic' ? '🎵' : '囍' }}</text>
-            <text class="tpl-switch-text">{{ currentTemplate === 'classic' ? '五迷模式' : '经典模式' }}</text>
+        <view class="tpl-switch-inner floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}">
+            <text class="floating-action-icon">{{ currentTemplate === 'classic' ? '🎵' : '囍' }}</text>
+            <text class="floating-action-text">{{ currentTemplate === 'classic' ? '五迷模式' : '经典模式' }}</text>
         </view>
     </view>
 </view>
@@ -87,7 +89,8 @@
 <view class="wife lh21 mb100">
     <view class="wife-desc">
         <view>/</view>
-        <view>{{ classicTemplate.anniversary }}</view>
+        <!-- <view>{{ classicTemplate.anniversary }}</view> -->
+        <view>她是生活的小太阳</view>
         <view>桃之夭夭</view>
         <view>灼灼其华</view>
     </view>

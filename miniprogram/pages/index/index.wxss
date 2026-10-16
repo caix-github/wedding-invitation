@@ -66,12 +66,6 @@
     gap: 24rpx;
 }
 
-.floating-actions .manager {
-    border: 4rpx solid #fff;
-    background: linear-gradient(135deg, #FFD166 0%, #FF9F43 100%);
-    box-shadow: 0 8rpx 28rpx rgba(255, 159, 67, .65);
-}
-
 .floating-action-button {
     display: flex;
     align-items: center;
@@ -83,6 +77,11 @@
     border-radius: 50%;
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
     box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, .4);
+    transition: opacity .25s ease;
+}
+
+.floating-action-button.actions-tucked {
+    opacity: .45;
 }
 
 /* 音乐悬浮组件 */
@@ -94,6 +93,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    transition: opacity .25s ease;
+}
+
+.music-float.actions-tucked {
+    opacity: .45;
 }
 
 .music-float-icon {
@@ -133,8 +137,8 @@
 }
 
 .music-float-icon image {
-    width: 48rpx;
-    height: 48rpx;
+    width: 40rpx;
+    height: 40rpx;
 }
 
 .music-float-mini-icon {
@@ -205,11 +209,6 @@
 
 .confetti-float:active {
     transform: scale(.9);
-}
-
-.confetti-float-icon {
-    line-height: 1;
-    font-size: 38rpx;
 }
 
 .confetti-particles {
@@ -772,16 +771,22 @@
 
 .manager {
     padding: 0;
-    transition: opacity .25s ease;
 }
 
-.manager.manager-tucked {
-    opacity: .45;
+.labeled-action {
+    flex-direction: column;
 }
 
-.manager image {
-    width: 48rpx;
-    height: 48rpx;
+.floating-action-icon {
+    font-size: 32rpx;
+    line-height: 1.2;
+}
+
+.floating-action-text {
+    color: white;
+    font-size: 16rpx;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 /* ===== 模板切换按钮 ===== */
@@ -794,23 +799,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
+    transition: transform 0.2s, opacity .25s ease;
 }
 
 .tpl-switch-inner:active {
     transform: scale(0.9);
-}
-
-.tpl-switch-icon {
-    font-size: 32rpx;
-    line-height: 1.2;
-}
-
-.tpl-switch-text {
-    font-size: 16rpx;
-    color: white;
-    font-weight: 600;
-    line-height: 1.2;
 }
 
 /* ===== 五迷模板样式 ===== */
