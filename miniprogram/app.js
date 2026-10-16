@@ -18,7 +18,7 @@ App({
         // isRemoved: false, // 手动党（为防止加载初始项目时因为没有云开发环境而报错，我先设为true，等搞好云开发环境后再把它改回false）
 
         // 魔法开关，开启后可使用完整功能，包括填写表单、祝福语轮播和视频号播放器等等
-        magic: Date.now() >= new Date('2026-10-12 19:00:00').getTime(),
+        magic: Date.now() >= new Date('2026-10-16 19:00:00').getTime(),
 
         // 婚礼日期时间
         weddingTime: '2026-11-19 12:00:00',
