@@ -15,17 +15,10 @@ Page({
 
         // 以上变量都不用动，以下变量是需要手动修改的
 
-        // 公告栏描述
-        desc: `帅哥靓女们都来看看，这里有「${publisher}」婚礼的第一手资料，接亲、婚宴细节全爆料！千万不要错过啊！！！`,
+        arrangementImage: 'https://cdn.jsdmirror.com/gh/caix-github/wedding-pics/jqap.png',
 
-        // 其余人员联系方式
-        phone: [{
-            name: '伴郎：XXX',
-            number: 'XXXXXXXXXXX'
-        }, {
-            name: '伴娘：XXX',
-            number: 'XXXXXXXXXXX'
-        }],
+        // 公告栏描述
+        desc: `这里是酒店，接亲、婚宴等相关事宜，还有注意事项请大家仔细阅读，祝大家玩的开心！`,
 
         // 定位信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
@@ -38,7 +31,7 @@ Page({
         // PDF资料（在云开发的「存储」里上传文件，就可以得到fileID了）
         files: [{
             name: '接亲时间表',
-            fileID: 'cloud://cloudbase-d3gdptj5haed10ab8.636c-cloudbase-d3gdptj5haed10ab8-1490539777/接亲时间表.txt'
+            fileID: 'cloud://cloudbase-d3gdptj5haed10ab8.636c-cloudbase-d3gdptj5haed10ab8-1490539777/接亲安排.png'
         }, {
             name: '宴席时间表',
             fileID: 'cloud://cloudbase-d3gdptj5haed10ab8.636c-cloudbase-d3gdptj5haed10ab8-1490539777/宴席时间表.txt'
@@ -46,8 +39,9 @@ Page({
 
         // 其它事项
         info: [
-            `各位需要过夜的兄弟姐妹酒店已安排好，入住时报名字（${couple.map(c => c.name).join('/')}）和手机号码（${couple.map(c => c.number).join('/')}）即可，酒店有停车场，可免费停车`,
-            '大家尽量9点半前到，实在有事的话最晚10点到，兄弟们把控好时间哈，辛苦大家',
+            `各位需要过夜的兄弟姐妹酒店已安排好，入住时报名字（${couple[1].name}）即可，酒店有停车场，可免费停车`,
+            '新郎方的亲友团们尽量9点半前到，实在有事的话最晚10点到，兄弟们把控好时间哈，辛苦大家',
+            '新娘方的亲友团们晚饭吃完后可以开始准备妆扮，尽量九点前准备好，摄影师会在酒店入场拍照',
             '最后的最后，文明接亲，欢乐接亲，希望大家多多配合，有什么需要，请联系帅气的新郎哥和美丽的新娘子，如有疏漏，请多多包涵'
         ]
     },
@@ -67,6 +61,15 @@ Page({
             longitude: location.longitude,
             name: location.name,
             address: location.address
+        })
+    },
+
+    // 预览接亲安排图片
+    previewArrangement() {
+        const image = this.data.arrangementImage
+        wx.previewImage({
+            current: image,
+            urls: [image]
         })
     },
 

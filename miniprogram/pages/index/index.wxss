@@ -22,6 +22,70 @@
     color: rgb(178, 178, 178);
 }
 
+.announcement-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 20rpx 30rpx 40rpx;
+    padding: 20rpx 64rpx 20rpx 24rpx;
+    border-radius: 16rpx;
+    background: linear-gradient(110deg, #FFF1E3 0%, #EAF3FF 100%);
+    box-shadow: 0 6rpx 20rpx rgba(49, 74, 112, .12);
+    color: #314A70;
+}
+
+.announcement-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 68rpx;
+    height: 68rpx;
+    margin-right: 20rpx;
+    border-radius: 50%;
+    background-color: rgba(255, 164, 92, .2);
+    font-size: 36rpx;
+}
+
+.announcement-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.announcement-title {
+    font-size: 27rpx;
+    font-weight: 600;
+}
+
+.announcement-summary {
+    margin-top: 4rpx;
+    color: #64748B;
+    font-size: 23rpx;
+}
+
+.announcement-action {
+    flex: none;
+    margin-left: 12rpx;
+    padding: 12rpx 18rpx;
+    border-radius: 24rpx;
+    background-color: #314A70;
+    color: #fff;
+    font-size: 22rpx;
+}
+
+.announcement-close {
+    position: absolute;
+    top: 4rpx;
+    right: 12rpx;
+    width: 40rpx;
+    height: 40rpx;
+    color: #64748B;
+    font-size: 34rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+
 .cover-wrap {
     position: relative;
     display: flex;
@@ -93,11 +157,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    transition: opacity .25s ease;
+    transition: opacity .25s ease, top .25s ease, right .25s ease;
+}
+
+.music-float.announcement-visible {
+    top: 20rpx;
 }
 
 .music-float.actions-tucked {
-    opacity: .45;
+    top: 20rpx;
+    right: -66rpx;
+    opacity: .7;
 }
 
 .music-float-icon {
@@ -767,10 +837,6 @@
 
 .controller image {
     width: 40rpx;
-}
-
-.manager {
-    padding: 0;
 }
 
 .labeled-action {
