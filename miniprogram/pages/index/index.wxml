@@ -1,11 +1,21 @@
+<view wx:if="{{ announcementVisible }}" class="announcement-banner" bindtap="goInfo" role="button" aria-label="查看婚礼公告详情">
+    <view class="announcement-icon">📢</view>
+    <view class="announcement-content">
+        <view class="announcement-title">婚礼公告</view>
+        <view class="announcement-summary">酒店信息，接亲安排，点击查看</view>
+    </view>
+    <view class="announcement-action">查看详情</view>
+    <!-- <view class="announcement-close" catchtap="dismissAnnouncement" role="button" aria-label="关闭公告">×</view> -->
+</view>
+
 <!-- 模板切换按钮 -->
 <!-- 音乐播放器固定在右上角 -->
-<view wx:if="{{ magic }}" class="music-float {{ musicExpanded ? 'expanded' : '' }} {{ musicClosed ? 'closed' : '' }} {{ actionsTucked ? 'actions-tucked' : '' }}">
+<view wx:if="{{ magic }}" class="music-float {{ musicExpanded ? 'expanded' : '' }} {{ musicClosed ? 'closed' : '' }} {{ actionsTucked ? 'actions-tucked' : '' }} {{ announcementVisible ? 'announcement-visible' : '' }}">
     <view wx:if="{{ musicClosed }}" class="music-float-icon floating-action-button" bindtap="reopenMusic">
         <text class="music-float-mini-icon">🎵</text>
     </view>
     <block wx:else>
-        <view class="music-float-panel" wx:if="{{ musicExpanded }}">
+        <view class="music-float-panel" wx:if="{{ musicExpanded && !actionsTucked }}">
             <view class="music-float-info">
                 <view class="music-float-name">{{ music.name }}</view>
                 <view class="music-float-singer">{{ music.singer }} · {{ musicIsPaused ? '已暂停' : '播放中' }}</view>
@@ -19,9 +29,9 @@
 </view>
 
 <view class="floating-actions">
-    <view wx:if="{{ isManager }}" class="manager floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}" bindtap="goInfo" role="button" aria-label="公告栏">
-        <text class="floating-action-icon">📢</text>
-        <text class="floating-action-text">公告栏</text>
+    <view wx:if="{{ backToTopVisible }}" class="back-to-top floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}" bindtap="goTop" role="button" aria-label="回到顶部">
+        <text class="floating-action-icon">↑</text>
+        <text class="floating-action-text">回顶部</text>
     </view>
 
     <view class="confetti-float floating-action-button labeled-action {{ actionsTucked ? 'actions-tucked' : '' }}" bindtap="launchConfetti" role="button" aria-label="撒花">

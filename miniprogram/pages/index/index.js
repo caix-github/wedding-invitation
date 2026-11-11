@@ -2,17 +2,15 @@ const {
     genLocation
 } = require('../../common/utils')
 
-// 管理员openid列表，可以在云开发管理页找到，是管理员的话可以看到公告栏页面入口，也可以通过云函数greetings的返回值openid来查看，还可以在本文件getGreetings方法里通过打印openid变量来查看
-const MANAGER = ['os2PD5C1AHTd0GFLpa3psQC8lEeg']
-
 const APP = getApp()
 const isRemoved = APP.globalData.isRemoved
 
 Page({
     data: {
         ...APP.globalData,
-        isManager: false, // 当前用户是否为管理员
+        announcementVisible: true, // 本次访问是否显示公告栏入口
         actionsTucked: false, // 页面滚动时收起悬浮操作按钮
+        backToTopVisible: false, // 页面滚动后显示回到顶部按钮
         musicIsPaused: false, // 是否暂停背景音乐
         musicExpanded: false, // 音乐面板是否展开
         musicClosed: false, // 音乐组件是否被手动关闭
@@ -159,12 +157,12 @@ Page({
           singer: '梦然' // 歌手名
         },
 
-        // 酒店信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
+        // 饭店信息（可以去高德地图或腾讯地图网页版上把经纬度爬下来）
         location: genLocation([{
-            name: '家有婚宴',
-            address: '详细地址：广东省揭阳市榕城区炮台镇石牌村石龙路22号',
-            latitude: 23.498987,
-            longitude: 116.505308
+            name: '瑞武餐厅',
+            address: '详细地址：广东省揭阳市榕城区砲台镇顺丰速运(石龙路营业点)东北侧70米',
+            latitude: 23.51,
+            longitude: 116.51
         }])[0],
 
     },
@@ -265,9 +263,14 @@ Page({
     },
 
     // 页面滚动时收起悬浮操作按钮，停止滚动后恢复
-    onPageScroll() {
+    onPageScroll(e) {
         if (!this.data.actionsTucked) {
             this.setData({ actionsTucked: true })
+        }
+
+        const backToTopVisible = e.scrollTop > 300
+        if (backToTopVisible !== this.data.backToTopVisible) {
+            this.setData({ backToTopVisible })
         }
 
         if (this.actionsRestoreTimer !== null) {
@@ -496,28 +499,15 @@ Page({
             name: 'greetings'
         }).then(({
             result: {
-                greetings,
-                openid
+                greetings
             }
         }) => {
-            console.log('openId: ', openid)
-            const isManager = MANAGER.indexOf(openid) > -1
             this.setData({
-                isManager,
                 greetings,
                 activeIdx: greetings.length
                     ? Math.max(this.data.activeIdx, 0) % greetings.length
                     : -1
             }, () => this.startGreetingCarousel())
-
-            if (isManager && !wx.getStorageSync('managerNoticeShown_v1')) {
-                wx.setStorageSync('managerNoticeShown_v1', true)
-                wx.showModal({
-                    title: '公告栏提醒',
-                    content: '点击右下角的公告栏按钮，可查看酒店信息和接亲相关细节。',
-                    showCancel: false
-                })
-            }
         })
     },
 
@@ -561,6 +551,21 @@ Page({
     goInfo() {
         wx.navigateTo({
             url: '../info/index'
+        })
+    },
+
+    // 回到页面顶部
+    goTop() {
+        wx.pageScrollTo({
+            scrollTop: 0,
+            duration: 300
+        })
+    },
+
+    // 关闭公告栏入口，本次页面访问期间不再显示
+    dismissAnnouncement() {
+        this.setData({
+            announcementVisible: false
         })
     },
 
